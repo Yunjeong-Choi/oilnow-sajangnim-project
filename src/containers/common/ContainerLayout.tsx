@@ -32,7 +32,7 @@ export default ContainerLayout;
 const HeaderLayout = styled.header`
   display: flex;
   justify-content: space-between;
-  padding: 1.8rem 1rem;
+  padding: 1.8rem 1.2rem;
 
   div {
     display: flex;
@@ -42,7 +42,6 @@ const HeaderLayout = styled.header`
     font-weight: bold;
     font-size: 2.8rem;
     line-height: 4.1rem;
-    color: var(--gray);
     margin-left: 1rem;
   }
 
@@ -50,7 +49,6 @@ const HeaderLayout = styled.header`
     font-weight: bold;
     font-size: 1.4rem;
     line-height: 2rem;
-    color: var(--gray);
     padding: 0.8rem 1.1rem;
     background-color: var(--lightGray);
     border-radius: 1.8rem;
