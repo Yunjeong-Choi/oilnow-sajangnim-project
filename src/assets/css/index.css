@@ -8,6 +8,20 @@
   --oilBlue: #5783fc;
 }
 
+/* 스크린 사이즈 */
+html,
+body,
+#root,
+.App {
+  height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 이외 공통사항 */
 html {
   font-size: 62.5%;
 }
@@ -24,9 +38,21 @@ body {
 }
 
 input,
-button {
+button,
+select {
   color: var(--gray);
 }
+
+select {
+  -webkit-appearance: none; /* for chrome */
+  -moz-appearance: none; /*for firefox*/
+  appearance: none;
+}
+
+select::-ms-expand {
+  display: none; /*for IE10,11*/
+}
+/* select에 화살표 이미지 백그라운드로 넣어야 함 */
 
 /* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

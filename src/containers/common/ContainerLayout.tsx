@@ -70,6 +70,8 @@ const HeaderLayout = styled.header`
 `;
 
 const MainLayout = styled.main`
-  height: 80rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   background: var(--lightGray);
 `;

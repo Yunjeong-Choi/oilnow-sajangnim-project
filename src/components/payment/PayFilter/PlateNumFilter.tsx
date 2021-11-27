@@ -38,7 +38,7 @@ const PlateNumFilterBox = styled.div`
     flex-grow: 1;
     border: none;
     text-align: left;
-    padding: 0 1rem;
+    padding-right: 1rem;
 
     ::placeholder {
       color: var(--borderGray);
