@@ -4,14 +4,21 @@ import ResultHeader from "./ResultHeader";
 import ResultList from "./ResultList";
 
 interface PayResultProps {
-  filterKeyword: string | undefined;
+  payStatusKeyword: string | undefined;
+  plateNumKeyword: string | undefined;
 }
 
-const PayResult: FunctionComponent<PayResultProps> = ({ filterKeyword }) => {
+const PayResult: FunctionComponent<PayResultProps> = ({
+  payStatusKeyword,
+  plateNumKeyword,
+}) => {
   return (
     <PayResultBox>
       <ResultHeader />
-      <ResultList filterKeyword={filterKeyword} />
+      <ResultList
+        payStatusKeyword={payStatusKeyword}
+        plateNumKeyword={plateNumKeyword}
+      />
     </PayResultBox>
   );
 };

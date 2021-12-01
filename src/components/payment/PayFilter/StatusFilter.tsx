@@ -1,12 +1,28 @@
+import { Dispatch, FunctionComponent, MouseEvent, SetStateAction } from "react";
 import styled from "styled-components";
 
 const statusList = ["결제대기", "결제완료", "취소요청", "취소완료"];
 
-const StatusFilter = () => {
+interface statusFilterProps {
+  setPayStatusKeyword: Dispatch<SetStateAction<string | undefined>>;
+}
+
+const StatusFilter: FunctionComponent<statusFilterProps> = ({
+  setPayStatusKeyword,
+}) => {
+  const handlePayStatusClick = (event: MouseEvent<HTMLButtonElement>) => {
+    console.log(event);
+    // const clickValue = event.target.value;
+    // setPayStatusKeyword(clickValue);
+  };
+  //TODO: 버튼의 값을 찾지 못함
+
   return (
     <StatusFilterBox>
       {statusList.map((status) => (
-        <button key={status}>{status}</button>
+        <button key={status} value={status} onClick={handlePayStatusClick}>
+          {status}
+        </button>
       ))}
     </StatusFilterBox>
   );

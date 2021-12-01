@@ -6,17 +6,17 @@
   --borderGray: #8a8a8a;
   --lightGray: #e9ecef;
   --oilBlue: #5783fc;
+  --red: #f42c10;
 }
 
 /* 스크린 사이즈 */
 html,
 body,
-#root,
-.App {
+#root {
   height: 100%;
 }
 
-.App {
+#root {
   display: flex;
   flex-direction: column;
 }

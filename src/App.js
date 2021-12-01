@@ -1,11 +1,17 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Payment from "./containers/Payment";
+import PayDetail from "./components/payment/PayDetail";
 // import Payment from "@containers/Payment";
-import Payment from "../src/containers/Payment";
+// import PayDetail from "@components/payment/PayDetail";
 
 function App() {
   return (
-    <div className="App">
-      <Payment />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Payment />} />
+        <Route path="/pay/:id" element={<PayDetail />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

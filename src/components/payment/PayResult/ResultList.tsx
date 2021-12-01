@@ -17,10 +17,14 @@ interface payDataListProps {
 }
 
 interface ResultListProps {
-  filterKeyword: string | undefined;
+  payStatusKeyword: string | undefined;
+  plateNumKeyword: string | undefined;
 }
 
-const ResultList: FunctionComponent<ResultListProps> = ({ filterKeyword }) => {
+const ResultList: FunctionComponent<ResultListProps> = ({
+  payStatusKeyword,
+  plateNumKeyword,
+}) => {
   // const list = [
   //   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
   //   22, 23, 24, 25, 26, 27, 28, 29, 30,
@@ -35,6 +39,22 @@ const ResultList: FunctionComponent<ResultListProps> = ({ filterKeyword }) => {
     scrollViewPortHeight,
     itemHeight * totalItemCount
   );
+
+  useEffect(() => {
+    if (typeof plateNumKeyword === "undefined") return;
+    // //TODO: 여기서 return을 찍어버리면 화면 전체가 하얗게 아무것도 리턴이 안되는건가?
+    // //TODO: 필터가 두개 일때 (payStatusKeyword)는 이 조건을 어떻게 처리해야 할까
+    // if (plateNumKeyword.length === 0) {
+    //   setFilteredList([]);
+    //   return;
+    // }
+
+    const filteredList = list.filter(
+      (item) => item.plateNum.includes(plateNumKeyword) //TODO: 띄어쓰기를 무시한 검색을 하려면?
+    );
+    setFilteredList(filteredList);
+  }, [plateNumKeyword]);
+
   // const startIndex = Math.max(Math.floor(scrollTop / itemHeight), 0);
   // const offsetY = startIndex * itemHeight;
   // const visibleNodes = list.slice(
@@ -77,20 +97,6 @@ const ResultList: FunctionComponent<ResultListProps> = ({ filterKeyword }) => {
   //   }
   // }, [scrollTop]);
 
-  useEffect(() => {
-    if (typeof filterKeyword === "undefined") return;
-    // //TODO: 여기서 return을 찍어버리면 화면 전체가 하얗게 아무것도 리턴이 안되는건가?
-    // if (filterKeyword.length === 0) {
-    //   setFilteredList([]);
-    //   return;
-    // }
-
-    const filteredList = list.filter(
-      (item) => item.plateNum.includes(filterKeyword) //TODO: 띄어쓰기를 무시한 검색을 하려면?
-    );
-    setFilteredList(filteredList);
-  }, [filterKeyword]);
-
   return (
     <ResultListBox
       style={{
@@ -103,13 +109,11 @@ const ResultList: FunctionComponent<ResultListProps> = ({ filterKeyword }) => {
         style={{ height: containerHeight, position: "relative" }}
         //TODO: 이걸 어떻게 styled 컴포넌트로 바꿀것인가
       >
-        {(filteredList.length > 0 ? filteredList : list).map(
-          ({ payID, ...item }) => (
-            <ResultItem key={payID} itemValue={item} />
-            // style={{ height: itemHeight, fontSize: 20, color: "white" }}
-            // {/* <ResultItem key={index} />; */}
-          )
-        )}
+        {(filteredList.length > 0 ? filteredList : list).map((item) => (
+          <ResultItem key={item.payID} itemValue={item} />
+          // style={{ height: itemHeight, fontSize: 20, color: "white" }}
+          // {/* <ResultItem key={index} />; */}
+        ))}
       </TotalItemBox>
     </ResultListBox>
   );

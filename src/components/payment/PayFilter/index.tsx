@@ -5,16 +5,20 @@ import PlateNumFilter from "./PlateNumFilter";
 import { Dispatch, FunctionComponent, SetStateAction } from "react";
 
 interface PayFilterProps {
-  setFilterKeyword: Dispatch<SetStateAction<string | undefined>>; //TODO: 이렇게 하는게 맞나,,,?
+  setPayStatusKeyword: Dispatch<SetStateAction<string | undefined>>;
+  setPlateNumKeyword: Dispatch<SetStateAction<string | undefined>>; //TODO: 이렇게 하는게 맞나,,,?
 }
 
-const PayFilter: FunctionComponent<PayFilterProps> = ({ setFilterKeyword }) => {
+const PayFilter: FunctionComponent<PayFilterProps> = ({
+  setPayStatusKeyword,
+  setPlateNumKeyword,
+}) => {
   return (
     <PayFilterBox>
       <span>검색 필터</span>
       <DateFilter />
-      <StatusFilter />
-      <PlateNumFilter setFilterKeyword={setFilterKeyword} />
+      <StatusFilter setPayStatusKeyword={setPayStatusKeyword} />
+      <PlateNumFilter setPlateNumKeyword={setPlateNumKeyword} />
     </PayFilterBox>
   );
 };

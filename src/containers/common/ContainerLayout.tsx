@@ -69,7 +69,7 @@ const HeaderLayout = styled.header`
   } */
 `;
 
-const MainLayout = styled.main`
+export const MainLayout = styled.main`
   flex-grow: 1;
   display: flex;
   flex-direction: column;

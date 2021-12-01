@@ -1,9 +1,11 @@
 import { FunctionComponent } from "react";
 import styled from "styled-components";
 import bracketRight from "../../../assets/images/bracketRight-icon.png";
+import { Link } from "react-router-dom";
 
 //TODO: 타입스크립트에서 타입을 정의하는 방식은?
 interface itemValueType {
+  payID: number;
   payStatus: string;
   payDate: string;
   plateNum: string;
@@ -15,7 +17,7 @@ interface ResultItemProps {
 }
 
 const ResultItem: FunctionComponent<ResultItemProps> = ({ itemValue }) => {
-  const { payStatus, payDate, plateNum, payPrice } = itemValue;
+  const { payID, payStatus, payDate, plateNum, payPrice } = itemValue;
   return (
     <ResultItemBox>
       <StyledPayStatus>{payStatus}</StyledPayStatus>
@@ -23,8 +25,10 @@ const ResultItem: FunctionComponent<ResultItemProps> = ({ itemValue }) => {
       <div>{plateNum}</div>
       <div>{payPrice}</div>
       <div>
-        <span>상세</span>
-        <img src={bracketRight} alt="bracket Right"></img>
+        <Link to={`/pay/${payID}`}>
+          <span>상세</span>
+          <img src={bracketRight} alt="bracket Right"></img>
+        </Link>
       </div>
     </ResultItemBox>
   );
