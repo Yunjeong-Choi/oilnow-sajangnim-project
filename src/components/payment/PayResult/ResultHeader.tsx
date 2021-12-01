@@ -3,9 +3,9 @@ import arrowDown from "../../../assets/images/arrowDown-icon.png";
 
 const colTitleList = ["결제상태", "날짜", "차량번호", "금액"];
 
-const ResultListHeader = () => {
+const ResultHeader = () => {
   return (
-    <ResultListHeaderBox>
+    <ResultHeaderBox>
       {colTitleList.map((title) => (
         <div key={title}>{title}</div>
       ))}
@@ -16,14 +16,14 @@ const ResultListHeader = () => {
           <option>오래된순</option>
         </select>
       </div>
-    </ResultListHeaderBox>
+    </ResultHeaderBox>
   );
 };
 
-export default ResultListHeader;
+export default ResultHeader;
 
 //styled-components
-const ResultListHeaderBox = styled.div`
+const ResultHeaderBox = styled.div`
   display: flex;
   align-items: center;
   padding-bottom: 1rem;

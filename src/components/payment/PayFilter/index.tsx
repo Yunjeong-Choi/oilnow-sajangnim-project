@@ -2,14 +2,19 @@ import styled from "styled-components";
 import DateFilter from "./DateFilter";
 import StatusFilter from "./StatusFilter";
 import PlateNumFilter from "./PlateNumFilter";
+import { Dispatch, FunctionComponent, SetStateAction } from "react";
 
-const PayFilter = () => {
+interface PayFilterProps {
+  setFilterKeyword: Dispatch<SetStateAction<string | undefined>>; //TODO: 이렇게 하는게 맞나,,,?
+}
+
+const PayFilter: FunctionComponent<PayFilterProps> = ({ setFilterKeyword }) => {
   return (
     <PayFilterBox>
       <span>검색 필터</span>
       <DateFilter />
       <StatusFilter />
-      <PlateNumFilter />
+      <PlateNumFilter setFilterKeyword={setFilterKeyword} />
     </PayFilterBox>
   );
 };

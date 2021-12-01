@@ -1,12 +1,35 @@
+import {
+  ChangeEvent,
+  Dispatch,
+  FunctionComponent,
+  SetStateAction,
+} from "react";
 import styled from "styled-components";
 import magnifyGlass from "../../../assets/images/magnifyGlass-icon.png";
+import useDebounce from "../../../hooks/useDebounce";
 
-const PlateNumFilter = () => {
+interface PlateNumFilterProps {
+  setFilterKeyword: Dispatch<SetStateAction<string | undefined>>; //TODO: 요것이 정상인지...
+}
+
+const PlateNumFilter: FunctionComponent<PlateNumFilterProps> = ({
+  setFilterKeyword,
+}) => {
+  const handlePlateNumInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    setFilterKeyword(inputValue);
+  };
+
+  const handleDebouncedInput = useDebounce(handlePlateNumInputChange);
+
   return (
     <PlateNumFilterBox>
       <label>
         <img src={magnifyGlass} alt="Magnify Glass"></img>
-        <input placeholder="고객 차량 번호"></input>
+        <input
+          placeholder="고객 차량 번호"
+          onChange={handleDebouncedInput}
+        ></input>
       </label>
     </PlateNumFilterBox>
   );

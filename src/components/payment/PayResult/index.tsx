@@ -1,12 +1,17 @@
+import { FunctionComponent } from "react";
 import styled from "styled-components";
-import ResultListHeader from "./ResultListHeader";
+import ResultHeader from "./ResultHeader";
 import ResultList from "./ResultList";
 
-const PayResult = () => {
+interface PayResultProps {
+  filterKeyword: string | undefined;
+}
+
+const PayResult: FunctionComponent<PayResultProps> = ({ filterKeyword }) => {
   return (
     <PayResultBox>
-      <ResultListHeader />
-      <ResultList />
+      <ResultHeader />
+      <ResultList filterKeyword={filterKeyword} />
     </PayResultBox>
   );
 };
