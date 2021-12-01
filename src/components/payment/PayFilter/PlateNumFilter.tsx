@@ -9,7 +9,8 @@ import magnifyGlass from "../../../assets/images/magnifyGlass-icon.png";
 import useDebounce from "../../../hooks/useDebounce";
 
 interface PlateNumFilterProps {
-  setPlateNumKeyword: Dispatch<SetStateAction<string | undefined>>; //TODO: 요것이 정상인지...
+  setPlateNumKeyword: Dispatch<SetStateAction<string | undefined>>;
+  //TODO: 요것이 정상적인 타입 정의인지...
 }
 
 const PlateNumFilter: FunctionComponent<PlateNumFilterProps> = ({

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import bracketRight from "../../../assets/images/bracketRight-icon.png";
 import { Link } from "react-router-dom";
 
-//TODO: 타입스크립트에서 타입을 정의하는 방식은?
+//TODO: 타입스크립트에서 타입을 정의하는 방식은? ResultItemProps를 이렇게 정의하는게 맞는 방식인가요?
 interface itemValueType {
   payID: number;
   payStatus: string;

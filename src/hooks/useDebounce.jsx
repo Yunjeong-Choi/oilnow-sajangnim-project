@@ -16,5 +16,5 @@ const useDebounce = (fn, delay = 225) => {
 
 export default useDebounce;
 
-//TODO: ...params의 구조가 이해가 되지 않음. onchange로부터 받은 걸 열어주는건가?
-//TODO: hook은 jsx로 해줘도 되나? 재사용성을 위해서?
+//TODO: ...params의 구조가 이해가 되지 않음. onchange로부터 받은 것인가요?
+//TODO: hook은 jsx로 해줘도 되나요? 재사용성을 위해서?

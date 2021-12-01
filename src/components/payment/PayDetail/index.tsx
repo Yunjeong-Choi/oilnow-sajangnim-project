@@ -87,4 +87,4 @@ const BackwardBtn = styled.button`
 const PayCancelBtn = styled.button`
   background-color: var(--red);
 `;
-//TODO: 왜 화면폭이 줄어들면 paycancel 의 width만 줄어들지
+//TODOs: 왜 화면폭이 줄어들면 paycancel 의 width만 줄어들지

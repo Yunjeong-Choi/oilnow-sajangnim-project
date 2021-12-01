@@ -62,7 +62,7 @@ const HeaderLayout = styled.header`
     background-color: var(--oilBlue);
   }
 
-  //TODO: 왜 안되는지 알수가 없음.....
+  //TODOs: 왜 안되는지 알수가 없음.....
   /* button:nth-child(2) {
     background: red;
     margin-left: auto;

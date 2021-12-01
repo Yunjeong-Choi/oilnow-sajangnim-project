@@ -15,7 +15,7 @@ const StatusFilter: FunctionComponent<statusFilterProps> = ({
     // const clickValue = event.target.value;
     // setPayStatusKeyword(clickValue);
   };
-  //TODO: 버튼의 값을 찾지 못함
+  //TODO: 버튼의 값을 찾지 못함...
 
   return (
     <StatusFilterBox>

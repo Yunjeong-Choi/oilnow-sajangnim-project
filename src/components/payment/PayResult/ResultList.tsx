@@ -6,7 +6,7 @@ import list from "../../../store/payData.json";
 const itemHeight = 45;
 const itemViewPortCount = 10;
 const itemReadyCount = itemViewPortCount + 10 * 2;
-const scrollViewPortHeight = 450;
+const scrollViewPortHeight = 500;
 
 interface payDataListProps {
   payID: number;
@@ -43,7 +43,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   useEffect(() => {
     if (typeof plateNumKeyword === "undefined") return;
     // //TODO: 여기서 return을 찍어버리면 화면 전체가 하얗게 아무것도 리턴이 안되는건가?
-    // //TODO: 필터가 두개 일때 (payStatusKeyword)는 이 조건을 어떻게 처리해야 할까
+    // //TODO: 필터가 두개 일때 (payStatusKeyword)는 이 조건을 어떻게 처리해야 할까요?
     // if (plateNumKeyword.length === 0) {
     //   setFilteredList([]);
     //   return;
@@ -111,8 +111,6 @@ const ResultList: FunctionComponent<ResultListProps> = ({
       >
         {(filteredList.length > 0 ? filteredList : list).map((item) => (
           <ResultItem key={item.payID} itemValue={item} />
-          // style={{ height: itemHeight, fontSize: 20, color: "white" }}
-          // {/* <ResultItem key={index} />; */}
         ))}
       </TotalItemBox>
     </ResultListBox>
@@ -123,7 +121,6 @@ export default ResultList;
 
 //styled-components
 const ResultListBox = styled.div`
-  background-color: gray;
   /* display: flex;
   flex-direction: column; */
 `;
