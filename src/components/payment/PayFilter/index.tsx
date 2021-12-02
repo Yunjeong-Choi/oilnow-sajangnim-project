@@ -3,10 +3,11 @@ import DateFilter from "./DateFilter";
 import StatusFilter from "./StatusFilter";
 import PlateNumFilter from "./PlateNumFilter";
 import { Dispatch, FunctionComponent, SetStateAction } from "react";
+import React from "react";
 
 interface PayFilterProps {
   setPayStatusKeyword: Dispatch<SetStateAction<string | undefined>>;
-  setPlateNumKeyword: Dispatch<SetStateAction<string | undefined>>;
+  setPlateNumKeyword: (param?: string) => void;
 }
 
 const PayFilter: FunctionComponent<PayFilterProps> = ({

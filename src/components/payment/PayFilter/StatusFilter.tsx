@@ -11,11 +11,9 @@ const StatusFilter: FunctionComponent<statusFilterProps> = ({
   setPayStatusKeyword,
 }) => {
   const handlePayStatusClick = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log(event);
-    // const clickValue = event.target.value;
-    // setPayStatusKeyword(clickValue);
+    const clickValue = event.currentTarget.value;
+    setPayStatusKeyword(clickValue);
   };
-  //TODO: 버튼의 값을 찾지 못함...
 
   return (
     <StatusFilterBox>

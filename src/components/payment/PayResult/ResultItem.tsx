@@ -3,8 +3,7 @@ import styled from "styled-components";
 import bracketRight from "../../../assets/images/bracketRight-icon.png";
 import { Link } from "react-router-dom";
 
-//TODO: 타입스크립트에서 타입을 정의하는 방식은? ResultItemProps를 이렇게 정의하는게 맞는 방식인가요?
-interface itemValueType {
+interface ResultItemProps {
   payID: number;
   payStatus: string;
   payDate: string;
@@ -12,12 +11,9 @@ interface itemValueType {
   payPrice: number;
 }
 
-interface ResultItemProps {
-  itemValue: itemValueType;
-}
+const ResultItem: FunctionComponent<ResultItemProps> = (props) => {
+  const { payID, payStatus, payDate, plateNum, payPrice } = props;
 
-const ResultItem: FunctionComponent<ResultItemProps> = ({ itemValue }) => {
-  const { payID, payStatus, payDate, plateNum, payPrice } = itemValue;
   return (
     <ResultItemBox>
       <StyledPayStatus>{payStatus}</StyledPayStatus>
@@ -25,7 +21,9 @@ const ResultItem: FunctionComponent<ResultItemProps> = ({ itemValue }) => {
       <div>{plateNum}</div>
       <div>{payPrice}</div>
       <div>
-        <Link to={`/pay/${payID}`}>
+        <Link to={`/pay/${payID}`} state={props}>
+          {/* <Link to={{ pathname: `/pay/${payID}`, state: { ...itemValue } }}> */}
+          {/* 쿼리스트링, 쿼리파람 등을 사용할 수 있으나 비추, 길이에 제한이 있고,  */}
           <span>상세</span>
           <img src={bracketRight} alt="bracket Right"></img>
         </Link>

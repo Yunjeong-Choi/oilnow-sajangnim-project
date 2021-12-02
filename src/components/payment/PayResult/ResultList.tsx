@@ -41,7 +41,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   );
 
   useEffect(() => {
-    if (typeof plateNumKeyword === "undefined") return;
+    // if (typeof plateNumKeyword === "undefined") return;
     // //TODO: 여기서 return을 찍어버리면 화면 전체가 하얗게 아무것도 리턴이 안되는건가?
     // //TODO: 필터가 두개 일때 (payStatusKeyword)는 이 조건을 어떻게 처리해야 할까요?
     // if (plateNumKeyword.length === 0) {
@@ -50,7 +50,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     // }
 
     const filteredList = list.filter(
-      (item) => item.plateNum.includes(plateNumKeyword) //TODO: 띄어쓰기를 무시한 검색을 하려면?
+      (item) => item.plateNum.includes(plateNumKeyword || "") //TODO: 띄어쓰기를 무시한 검색을 하려면?
     );
     setFilteredList(filteredList);
   }, [plateNumKeyword]);
@@ -99,18 +99,19 @@ const ResultList: FunctionComponent<ResultListProps> = ({
 
   return (
     <ResultListBox
-      style={{
-        height: scrollViewPortHeight,
-        overflowY: "auto", //하위 요소가 부모요소를 넘어서면 스크롤이 생기도록
-        //TODO: 이걸 어떻게 styled 컴포넌트로 바꿀것인가
-      }}
+      height={scrollViewPortHeight}
+      // style={{
+      //   height: scrollViewPortHeight,
+      //   overflowY: "auto", //하위 요소가 부모요소를 넘어서면 스크롤이 생기도록
+      //   //TODO: 이걸 어떻게 styled 컴포넌트로 바꿀것인가
+      // }}
     >
       <TotalItemBox
         style={{ height: containerHeight, position: "relative" }}
         //TODO: 이걸 어떻게 styled 컴포넌트로 바꿀것인가
       >
         {(filteredList.length > 0 ? filteredList : list).map((item) => (
-          <ResultItem key={item.payID} itemValue={item} />
+          <ResultItem key={item.payID} {...item} />
         ))}
       </TotalItemBox>
     </ResultListBox>
@@ -120,7 +121,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
 export default ResultList;
 
 //styled-components
-const ResultListBox = styled.div`
+const ResultListBox = styled.div<{ height: number }>`
   /* display: flex;
   flex-direction: column; */
 `;

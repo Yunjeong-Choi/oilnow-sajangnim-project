@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { useLocation } from "react-router";
 
 const PayDetailInfo = () => {
+  const location = useLocation();
+  // console.log(location);
+
   return (
     <PayDetailInnerBox>
       <span>결제 상세 정보</span>

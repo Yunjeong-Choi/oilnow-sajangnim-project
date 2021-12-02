@@ -1,13 +1,21 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import bracketLeft from "../../../assets/images/bracketLeft-icon.png";
 import { MainLayout } from "../../../containers/common/ContainerLayout";
 import CustomerCancelRequest from "./CustomerCancelRequest";
 import PayDetailInfo from "./PayDetailInfo";
+import PayCancelModal from "./PayCancelModal";
 
 const PayDetail = () => {
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
+
   return (
     <>
+      {/* <PayCancelModal setIsCancelModalOpen={setIsCancelModalOpen} /> */}
+      {isCancelModalOpen ? (
+        <PayCancelModal setIsCancelModalOpen={setIsCancelModalOpen} />
+      ) : null}
       <HeaderLayout>
         <Link to="/">
           <button>
@@ -23,7 +31,9 @@ const PayDetail = () => {
           <Link to="/">
             <BackwardBtn>돌아가기</BackwardBtn>
           </Link>
-          <PayCancelBtn>결제취소</PayCancelBtn>
+          <PayCancelBtn onClick={() => setIsCancelModalOpen(true)}>
+            결제취소
+          </PayCancelBtn>
         </ProcessOptions>
       </MainLayout>
     </>
