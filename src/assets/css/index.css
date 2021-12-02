@@ -39,7 +39,8 @@ body {
 
 input,
 button,
-select {
+select,
+a {
   color: var(--gray);
 }
 

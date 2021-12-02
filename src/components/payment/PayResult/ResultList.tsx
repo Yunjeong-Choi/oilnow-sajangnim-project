@@ -6,7 +6,7 @@ import list from "../../../store/payData.json";
 const itemHeight = 45;
 const itemViewPortCount = 10;
 const itemReadyCount = itemViewPortCount + 10 * 2;
-const scrollViewPortHeight = 500;
+const scrollViewPortHeight = 400;
 
 interface payDataListProps {
   payID: number;
@@ -14,6 +14,10 @@ interface payDataListProps {
   payDate: string;
   plateNum: string;
   payPrice: number;
+  orderDetail: string;
+  cancelReason: string;
+  cancelImgURL: string;
+  cancelClaim: string;
 }
 
 interface ResultListProps {
@@ -105,16 +109,12 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   return (
     <ResultListBox
       height={scrollViewPortHeight}
-      // style={{
-      //   height: scrollViewPortHeight,
-      //   overflowY: "auto", //하위 요소가 부모요소를 넘어서면 스크롤이 생기도록
-      //   //TODO: 이걸 어떻게 styled 컴포넌트로 바꿀것인가
-      // }}
+      style={{
+        overflowY: "auto", //하위 요소가 부모요소를 넘어서면 스크롤이 생기도록
+        //TODO: 타입에 쉼표가 자꾸 세미콜론으로 바뀜
+      }}
     >
-      <TotalItemBox
-        style={{ height: containerHeight, position: "relative" }}
-        //TODO: 이걸 어떻게 styled 컴포넌트로 바꿀것인가
-      >
+      <TotalItemBox style={{ height: containerHeight, position: "relative" }}>
         {(filteredList.length > 0 ? filteredList : list).map((item) => (
           <ResultItem key={item.payID} {...item} />
         ))}
@@ -127,6 +127,7 @@ export default ResultList;
 
 //styled-components
 const ResultListBox = styled.div<{ height: number }>`
+  height: ${(props) => props.height};
   /* display: flex;
   flex-direction: column; */
 `;

@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 
 const PayDetailInfo = () => {
   const location = useLocation();
-  // console.log(location);
+  const { payDate, plateNum, orderDetail, payPrice } = location.state;
 
   return (
     <PayDetailInnerBox>
@@ -16,10 +16,10 @@ const PayDetailInfo = () => {
           <div>이용금액</div>
         </RowTitle>
         <TableContent>
-          <div>20210910</div>
-          <div>20210910</div>
-          <div>20210910</div>
-          <div>20210910</div>
+          <div>{payDate || "-"}</div>
+          <div>{plateNum || "-"}</div>
+          <div>{orderDetail || "-"}</div>
+          <div>{payPrice || "-"}</div>
         </TableContent>
       </InfoTable>
     </PayDetailInnerBox>

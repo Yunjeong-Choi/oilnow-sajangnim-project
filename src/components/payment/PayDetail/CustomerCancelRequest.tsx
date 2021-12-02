@@ -1,13 +1,20 @@
+import { useLocation } from "react-router";
 import styled from "styled-components";
 import { PayDetailInnerBox } from "./PayDetailInfo";
+import noImage from "../../../assets/images/noImage-icon.jpg";
 
 const CustomerCancelRequest = () => {
+  const location = useLocation();
+  const { cancelClaim, cancelImgURL } = location.state;
+
   return (
     <PayDetailInnerBox>
       <span>고객 취소 요청</span>
       <RequestDetail>
-        <RequestText>결제 금액이 잘못되었어요ㅠㅠ</RequestText>
-        <RequestImg>이미지</RequestImg>
+        <RequestText>{cancelClaim}</RequestText>
+        <RequestImg>
+          <img src={cancelImgURL || noImage} alt="cancel img url"></img>
+        </RequestImg>
       </RequestDetail>
     </PayDetailInnerBox>
   );
@@ -36,4 +43,11 @@ const RequestText = styled.div`
 const RequestImg = styled.div`
   width: 8rem;
   height: 8rem;
+  display: flex;
+  align-items: center;
+
+  img {
+    margin: auto;
+    width: 7rem;
+  }
 `;

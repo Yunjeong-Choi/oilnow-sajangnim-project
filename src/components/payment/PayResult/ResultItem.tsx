@@ -89,6 +89,10 @@ const ResultItemBox = styled.div`
     padding: 0.5rem 0;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   img {
     width: 0.6rem;
     height: 1rem;
