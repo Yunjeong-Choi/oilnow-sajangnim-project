@@ -6,7 +6,7 @@ import { Dispatch, FunctionComponent, SetStateAction } from "react";
 import React from "react";
 
 interface PayFilterProps {
-  setPayStatusKeyword: Dispatch<SetStateAction<string | undefined>>;
+  setPayStatusKeyword: (param?: string) => void;
   setPlateNumKeyword: (param?: string) => void;
 }
 

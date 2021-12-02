@@ -3,6 +3,42 @@ import styled from "styled-components";
 import bracketRight from "../../../assets/images/bracketRight-icon.png";
 import { Link } from "react-router-dom";
 
+// type PayStatusKey =
+//   | "waitForPaid"
+//   | "paid"
+//   | "cancelRequest"
+//   | "cancelCompleted";
+// type PayStatusKoValue = "결제대기" | "결제완료" | "취소요청" | "취소완료";
+// interface parsePayStatusType {
+//   [key in PayStatusKey]: PayStatusKoValue
+// }
+//TODO: 이건 왜 안될까
+
+interface parsePayStatusType {
+  [key: string]: string;
+}
+
+export const parsePayStatus: parsePayStatusType = {
+  waitForPaid: "결제대기",
+  paid: "결제완료",
+  cancelRequest: "취소요청",
+  cancelCompleted: "취소완료",
+};
+
+const payStatusColor: parsePayStatusType = {
+  결제대기: "rgba(253, 215, 81, 0.88)",
+  결제완료: "#74D186",
+  취소요청: "rgba(244, 44, 16, 0.51)",
+  취소완료: "#C4C4C4",
+};
+
+// const parsePayStatus: parsePayStatusType = {
+//   waitForPaid: { ko: "결제대기", co: "red" },
+//   paid: { ko: "결제완료", co: "yellow" },
+//   cancelRequest: { ko: "취소요청", co: "blue" },
+//   cancelCompleted: { ko: "취소완료", co: "green" },
+// };
+
 interface ResultItemProps {
   payID: number;
   payStatus: string;
@@ -13,10 +49,13 @@ interface ResultItemProps {
 
 const ResultItem: FunctionComponent<ResultItemProps> = (props) => {
   const { payID, payStatus, payDate, plateNum, payPrice } = props;
+  const payStatusKo = parsePayStatus[payStatus];
 
   return (
     <ResultItemBox>
-      <StyledPayStatus>{payStatus}</StyledPayStatus>
+      <StyledPayStatus color={payStatusColor[payStatusKo]}>
+        {payStatusKo}
+      </StyledPayStatus>
       <div>{payDate}</div>
       <div>{plateNum}</div>
       <div>{payPrice}</div>
@@ -59,6 +98,6 @@ const ResultItemBox = styled.div`
 `;
 
 const StyledPayStatus = styled.div`
-  background-color: rgba(253, 215, 81, 0.88);
+  background-color: ${(props) => props.color};
   border-radius: 1.5rem;
 `;

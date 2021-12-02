@@ -41,8 +41,6 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   );
 
   useEffect(() => {
-    // if (typeof plateNumKeyword === "undefined") return;
-    // //TODO: 여기서 return을 찍어버리면 화면 전체가 하얗게 아무것도 리턴이 안되는건가?
     // //TODO: 필터가 두개 일때 (payStatusKeyword)는 이 조건을 어떻게 처리해야 할까요?
     // if (plateNumKeyword.length === 0) {
     //   setFilteredList([]);
@@ -50,10 +48,17 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     // }
 
     const filteredList = list.filter(
-      (item) => item.plateNum.includes(plateNumKeyword || "") //TODO: 띄어쓰기를 무시한 검색을 하려면?
+      // if (typeof plateNumKeyword === "undefined") return;
+      // 얼리리턴을 해도 되지만 아래처럼 하는게 더 간결함
+      (item) =>
+        item.plateNum.includes(plateNumKeyword || "") ||
+        item.payStatus === payStatusKeyword //TODO: 왜 안될까...
     );
     setFilteredList(filteredList);
-  }, [plateNumKeyword]);
+  }, [plateNumKeyword, payStatusKeyword]);
+  //띄어쓰기를 무시한 검색이 가능하도록 하려면 공수가 많이 듬. 주소검색은 분류가 명확하니까 괜찮지만
+  //한글자씩 검색해서 결과를 추려나갈수도 있음
+  //공수를 들이는 만큼 효용이 있는가, 선택의 문제
 
   // const startIndex = Math.max(Math.floor(scrollTop / itemHeight), 0);
   // const offsetY = startIndex * itemHeight;

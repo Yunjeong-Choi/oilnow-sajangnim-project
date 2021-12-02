@@ -1,10 +1,12 @@
 import { Dispatch, FunctionComponent, MouseEvent, SetStateAction } from "react";
 import styled from "styled-components";
+import { parsePayStatus } from "../PayResult/ResultItem";
 
-const statusList = ["결제대기", "결제완료", "취소요청", "취소완료"];
+// const statusList = ["결제대기", "결제완료", "취소요청", "취소완료"];
+const statusList = Object.entries(parsePayStatus);
 
 interface statusFilterProps {
-  setPayStatusKeyword: Dispatch<SetStateAction<string | undefined>>;
+  setPayStatusKeyword: (param?: string) => void;
 }
 
 const StatusFilter: FunctionComponent<statusFilterProps> = ({
@@ -18,8 +20,12 @@ const StatusFilter: FunctionComponent<statusFilterProps> = ({
   return (
     <StatusFilterBox>
       {statusList.map((status) => (
-        <button key={status} value={status} onClick={handlePayStatusClick}>
-          {status}
+        <button
+          key={status[0]}
+          value={status[0]}
+          onClick={handlePayStatusClick}
+        >
+          {status[1]}
         </button>
       ))}
     </StatusFilterBox>
