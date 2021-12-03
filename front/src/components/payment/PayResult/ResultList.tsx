@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import ResultItem from "./ResultItem";
-import { FunctionComponent, useEffect, useState } from "react";
-import list from "../../../store/payData.json";
+import { FunctionComponent, useEffect, useState, useCallback } from "react";
+import fetchData from "api/fetchData";
+// import list from "../../../store/payData.json";
 
 const itemHeight = 45;
 const itemViewPortCount = 10;
 const itemReadyCount = itemViewPortCount + 10 * 2;
 const scrollViewPortHeight = 400;
 
-interface payDataListProps {
+export interface payDataListProps {
   payID: number;
   payStatus: string;
   payDate: string;
@@ -18,6 +19,10 @@ interface payDataListProps {
   cancelReason: string;
   cancelImgURL: string;
   cancelClaim: string;
+}
+
+interface responseType {
+  payData: [];
 }
 
 interface ResultListProps {
@@ -33,9 +38,9 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   //   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
   //   22, 23, 24, 25, 26, 27, 28, 29, 30,
   // ];
-  // const [list, setList] = useState([]);
   // const [scrollTop, scrollContainerRef] = useScroll();
   // const [page, setPage] = useState(0);
+  const [list, setList] = useState<payDataListProps[]>([]);
   const [filteredList, setFilteredList] = useState<payDataListProps[]>([]);
 
   const totalItemCount = Math.max(list.length, itemReadyCount);
@@ -71,33 +76,21 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   //   startIndex + scrollViewPortHeight / itemHeight
   // );
 
-  // const getItem = useCallback(async () => {
-  //   const apiData = {
-  //     result: undefined,
-  //     success: undefined,
-  //   };
-
-  //   try {
-  //     const data = await fetchItem(page);
-  //     apiData.result = data;
-  //     apiData.success = true;
-  //   } catch (e) {
-  //     console.error(e);
-  //     apiData.success = false;
-  //   }
-
-  //   if (!apiData.success) {
-  //     alert("API call error!");
-  //     return;
-  //   }
-
-  //   console.log("getItem!", page);
-  //   setList(list.concat(apiData.result));
-  // }, [page]);
-
-  // useEffect(() => {
-  //   getItem();
-  // }, [page]);
+  const getData = useCallback(async () => {
+    try {
+      const data = await fetchData();
+      const { payData } = data;
+      setList(payData);
+      console.log(payData);
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+  //TODO: 왜 여기에 디펜던시 설정이 있는데, 아래 useEffect로 한번 더 할까
+  //처음 렌더링 될때 한번 실행이 되어야 하니까?
+  useEffect(() => {
+    getData();
+  }, []);
 
   // useEffect(() => {
   //   const BUFFER_AREA = scrollViewPortHeight / 3;

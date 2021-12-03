@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import styled from "styled-components";
 import bracketRight from "../../../assets/images/bracketRight-icon.png";
 import { Link } from "react-router-dom";
+import { payDataListProps } from "./ResultList";
 
 // type PayStatusKey =
 //   | "waitForPaid"
@@ -39,15 +40,15 @@ const payStatusColor: parsePayStatusType = {
 //   cancelCompleted: { ko: "취소완료", co: "green" },
 // };
 
-interface ResultItemProps {
-  payID: number;
-  payStatus: string;
-  payDate: string;
-  plateNum: string;
-  payPrice: number;
-}
+// interface ResultItemProps {
+//   payID: number;
+//   payStatus: string;
+//   payDate: string;
+//   plateNum: string;
+//   payPrice: number;
+// }
 
-const ResultItem: FunctionComponent<ResultItemProps> = (props) => {
+const ResultItem: FunctionComponent<payDataListProps> = (props) => {
   const { payID, payStatus, payDate, plateNum, payPrice } = props;
   const payStatusKo = parsePayStatus[payStatus];
 
