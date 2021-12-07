@@ -56,9 +56,11 @@ const ResultItem: FunctionComponent<payDataListProps> = (props) => {
 
   return (
     <ResultItemBox>
-      <StyledPayStatus color={payStatusColor[payStatusKo]}>
-        {payStatusKo}
-      </StyledPayStatus>
+      <div>
+        <StyledPayStatus color={payStatusColor[payStatusKo]}>
+          {payStatusKo}
+        </StyledPayStatus>
+      </div>
       <div>{payDate}</div>
       <div>{plateNum}</div>
       <div>{payPrice}</div>
@@ -85,11 +87,23 @@ const ResultItemBox = styled.div`
   padding: 1rem 0;
   border-bottom: 0.07rem solid var(--lightGray);
 
-  div {
+  > div {
     flex-grow: 1;
     width: 6.5rem;
     text-align: center;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
+
+    :first-child {
+      padding: 0 0.5rem;
+    }
+
+    :nth-of-type(4) {
+      width: 4rem;
+    }
+
+    :last-child {
+      width: 3.5rem;
+    }
   }
 
   a {
@@ -105,6 +119,10 @@ const ResultItemBox = styled.div`
 `;
 
 const StyledPayStatus = styled.div`
+  height: 100%;
   background-color: ${(props) => props.color};
   border-radius: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

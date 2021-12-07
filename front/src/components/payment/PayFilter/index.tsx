@@ -32,6 +32,7 @@ const PayFilterBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 1.2rem;
+  /* padding-bottom: 1.5rem; */
   background-color: white;
 
   span {

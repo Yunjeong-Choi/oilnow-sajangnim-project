@@ -7,7 +7,7 @@ import fetchData from "../../../api/fetchData";
 const itemHeight = 45;
 const itemViewPortCount = 10;
 const itemReadyCount = itemViewPortCount + 10 * 2;
-const scrollViewPortHeight = 400;
+const scrollViewPortHeight = 490;
 
 export interface payDataListProps {
   payID: number;
@@ -127,8 +127,9 @@ export default ResultList;
 // }
 const ResultListBox = styled.div<{ pHeight: number }>`
   height: ${(props) => `${props.pHeight}px`};
-  overflow-y: auto;
   /* TODO: 높이가 안 먹히고 있음 -> 단위 인식을 못하는 것으로 추측 */
+  overflow-y: auto;
+  padding-right: 1.2rem;
 `;
 
 const TotalItemBox = styled.div``;

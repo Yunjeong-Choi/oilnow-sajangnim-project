@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
-// import "react-datepicker/dist/react-datepicker.css";
-// import "../../../assets/css/datePicker.css";
 import { useState } from "react";
 
 registerLocale("ko", ko);
@@ -27,7 +25,6 @@ const DateFilter = () => {
           placeholderText="시작 날짜"
         />
       </div>
-      {/* <div>StartDate</div> */}
       <span>~</span>
       <div>
         <StyledDatePicker

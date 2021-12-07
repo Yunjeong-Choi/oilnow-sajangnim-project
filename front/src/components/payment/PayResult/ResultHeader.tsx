@@ -26,22 +26,32 @@ export default ResultHeader;
 const ResultHeaderBox = styled.div`
   display: flex;
   align-items: center;
-  padding-bottom: 1rem;
+  padding: 0 1rem 1rem 0;
   border-bottom: 0.07rem solid var(--borderGray);
 
-  div {
-    width: 6rem;
+  > div {
+    width: 6.5rem;
     flex-grow: 1;
     text-align: center;
     font-weight: 500;
     font-size: 1.2rem;
     line-height: 1.7rem;
+
+    :nth-of-type(4) {
+      width: 4rem;
+    }
+
+    :last-child {
+      width: 3.5rem;
+    }
   }
 
   select {
     width: 60%;
     min-width: 4.8rem;
     height: 2rem;
+    margin-top: 0.1rem;
+    padding-top: 0.125em;
     padding-right: 1rem;
     background-image: url("../../../assets/images/arrowDown-icon.png") no-repeat
       95% 50%;

@@ -30,6 +30,7 @@ const PayResultBox = styled.div`
   margin-top: 1rem;
   background-color: white;
   padding: 1rem;
+  padding-top: 1.5rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
