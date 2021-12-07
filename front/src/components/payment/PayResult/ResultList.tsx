@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ResultItem from "./ResultItem";
 import { FunctionComponent, useEffect, useState, useCallback } from "react";
-import fetchData from "api/fetchData";
+import fetchData from "../../../api/fetchData";
 // import list from "../../../store/payData.json";
 
 const itemHeight = 45;
@@ -50,7 +50,6 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   );
 
   useEffect(() => {
-    // //TODO: 필터가 두개 일때 (payStatusKeyword)는 이 조건을 어떻게 처리해야 할까요?
     // if (plateNumKeyword.length === 0) {
     //   setFilteredList([]);
     //   return;
@@ -60,9 +59,11 @@ const ResultList: FunctionComponent<ResultListProps> = ({
       // if (typeof plateNumKeyword === "undefined") return;
       // 얼리리턴을 해도 되지만 아래처럼 하는게 더 간결함
       (item) =>
-        item.plateNum.includes(plateNumKeyword || "") ||
-        item.payStatus === payStatusKeyword //TODO: 왜 안될까...
+        plateNumKeyword !== undefined &&
+        item.plateNum.includes(plateNumKeyword) &&
+        item.payStatus === payStatusKeyword //TODO: 둘중 하나만 조건이 걸렸을때는 어떻게 처리 할것인지 지정을 해줘야 함
     );
+    console.log(filteredList, plateNumKeyword, payStatusKeyword);
     setFilteredList(filteredList);
   }, [plateNumKeyword, payStatusKeyword]);
   //띄어쓰기를 무시한 검색이 가능하도록 하려면 공수가 많이 듬. 주소검색은 분류가 명확하니까 괜찮지만
@@ -101,11 +102,12 @@ const ResultList: FunctionComponent<ResultListProps> = ({
 
   return (
     <ResultListBox
-      height={scrollViewPortHeight}
-      style={{
-        overflowY: "auto", //하위 요소가 부모요소를 넘어서면 스크롤이 생기도록
-        //TODO: 타입에 쉼표가 자꾸 세미콜론으로 바뀜
-      }}
+      pHeight={scrollViewPortHeight}
+      // style={{
+      //   height: 400,
+      //   overflowY: "auto", //하위 요소가 부모요소를 넘어서면 스크롤이 생기도록
+      //   //TODO: 타입에 쉼표가 자꾸 세미콜론으로 바뀜 -> 인터페이스로 지정한다. 린트때문인듯
+      // }}
     >
       <TotalItemBox style={{ height: containerHeight, position: "relative" }}>
         {(filteredList.length > 0 ? filteredList : list).map((item) => (
@@ -119,9 +121,14 @@ const ResultList: FunctionComponent<ResultListProps> = ({
 export default ResultList;
 
 //styled-components
-const ResultListBox = styled.div<{ height: number }>`
-  height: ${(props) => props.height};
-  /* TODO: 높이가 안 먹히고 있음 */
+// interface ResultListBoxProps {
+//   pHeight: number;
+//   overflowY: string
+// }
+const ResultListBox = styled.div<{ pHeight: number }>`
+  height: ${(props) => `${props.pHeight}px`};
+  overflow-y: auto;
+  /* TODO: 높이가 안 먹히고 있음 -> 단위 인식을 못하는 것으로 추측 */
 `;
 
 const TotalItemBox = styled.div``;

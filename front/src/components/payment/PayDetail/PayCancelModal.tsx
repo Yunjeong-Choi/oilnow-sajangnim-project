@@ -15,7 +15,7 @@ const PayCancelModal: FunctionComponent<PayCancelModalProps> = ({
   //     setIsCancelModalOpen(false);
   //   }
   // };
-  //TODO: 왜 안먹힐까잉... 분명 null인디...
+  //TODOs: 왜 안먹힐까잉... 분명 null인디...
 
   return (
     // <PayCancelModalBG onClick={handleModalBGClick}>

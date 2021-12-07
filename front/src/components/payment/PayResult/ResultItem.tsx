@@ -11,9 +11,11 @@ import { payDataListProps } from "./ResultList";
 //   | "cancelCompleted";
 // type PayStatusKoValue = "결제대기" | "결제완료" | "취소요청" | "취소완료";
 // interface parsePayStatusType {
-//   [key in PayStatusKey]: PayStatusKoValue
+//   [key in PayStatusKey]: PayStatusKoValue;
 // }
-//TODO: 이건 왜 안될까
+//TODO: 이건 왜 안될까요...
+//in은 내부에 있는 모든 타입을 가져온다. (자바스크립트의 문법)
+//record를 쓰는게 더 가독성이 있음
 
 interface parsePayStatusType {
   [key: string]: string;

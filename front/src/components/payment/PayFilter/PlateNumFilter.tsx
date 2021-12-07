@@ -9,14 +9,15 @@ import magnifyGlass from "../../../assets/images/magnifyGlass-icon.png";
 import useDebounce from "../../../hooks/useDebounce";
 
 interface PlateNumFilterProps {
-  setPlateNumKeyword: (param: string) => void;
+  setPlateNumKeyword: (param?: string) => void;
 }
 
 const PlateNumFilter: FunctionComponent<PlateNumFilterProps> = ({
   setPlateNumKeyword,
 }) => {
   const handlePlateNumInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+    const inputValue = event.target.value || undefined;
+    console.log(inputValue);
     setPlateNumKeyword(inputValue);
   };
 
