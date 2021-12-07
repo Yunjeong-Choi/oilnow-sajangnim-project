@@ -1,11 +1,50 @@
 import styled from "styled-components";
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import { ko } from "date-fns/esm/locale";
+// import "react-datepicker/dist/react-datepicker.css";
+// import "../../../assets/css/datePicker.css";
+import { useState } from "react";
+
+registerLocale("ko", ko);
+setDefaultLocale("ko");
+
+type DateProps = Date | null;
 
 const DateFilter = () => {
+  const [startDate, setStartDate] = useState<DateProps>();
+  const [endDate, setEndDate] = useState<DateProps>();
+
   return (
     <DateFilterBox>
-      <div>StartDate</div>
+      <div>
+        <StyledDatePicker
+          dateFormat="yyyy.MM.dd (eee)"
+          selected={startDate}
+          onChange={(date: DateProps) => setStartDate(date)}
+          selectsStart
+          startDate={startDate}
+          endDate={endDate}
+          placeholderText="시작 날짜"
+        />
+      </div>
+      {/* <div>StartDate</div> */}
       <span>~</span>
-      <div>EndDate</div>
+      <div>
+        <StyledDatePicker
+          dateFormat="yyyy.MM.dd (eee)"
+          selected={endDate}
+          onChange={(date: DateProps) => setEndDate(date)}
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
+          minDate={startDate}
+          placeholderText="종료 날짜"
+        />
+      </div>
+      {/* TODO: startDate가 기존에 선택된 endDate보다 뒤의 날짜가 된다면 endDate는 리셋되도록 */}
+      {/* TODO: onClickOutside로 캘린더를 닫을 수 있음 */}
+      {/* TODO: 달력이미지는 custom input으로 해결하면 될듯 */}
+      {/* TODO: 헤더의 날짜 형식을 바꾸려면 custom header를 넣어줘야 함 */}
       <button>적용</button>
     </DateFilterBox>
   );
@@ -14,6 +53,16 @@ const DateFilter = () => {
 export default DateFilter;
 
 //styled-components
+const StyledDatePicker = styled(DatePicker)`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem 1rem;
+  height: 100%;
+  background: #ffffff;
+  border: 0.07rem solid var(--borderGray);
+  border-radius: 0.4rem;
+`;
+
 const DateFilterBox = styled.div`
   display: flex;
   height: 3rem;
@@ -24,15 +73,13 @@ const DateFilterBox = styled.div`
     padding: 0 0.5rem;
   }
 
-  div {
+  > div {
     flex-grow: 1;
-    background: #ffffff;
-    border: 0.07rem solid var(--borderGray);
-    border-radius: 0.4rem;
   }
 
-  button {
+  > button {
     flex-grow: 0.2;
+    min-width: 5rem;
     margin-left: 1rem;
     background: var(--gray);
     font-weight: bold;
@@ -40,6 +87,6 @@ const DateFilterBox = styled.div`
     color: white;
     border: none;
     border-radius: 0.4rem;
-    padding: 0 1rem;
+    padding: 0 0.7em;
   }
 `;

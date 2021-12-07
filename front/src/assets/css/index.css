@@ -1,4 +1,5 @@
 @import "reset.css";
+@import "react-datepicker/dist/react-datepicker.css";
 
 :root {
   --black: #000000;
@@ -59,3 +60,58 @@ select::-ms-expand {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
+
+/* adjust react date-picker css */
+
+.react-datepicker {
+  font-size: 1.4em;
+  border-radius: 0.4rem;
+}
+
+.react-datepicker__month-container {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+}
+
+.react-datepicker__header {
+  padding: 0.8em 0;
+}
+
+.react-datepicker__current-month {
+  font-size: 1.1em;
+  margin: 0.2em 0 0.3em 0;
+}
+
+.react-datepicker__month {
+  margin: 1em;
+}
+.react-datepicker__day-name,
+.react-datepicker__day {
+  width: 1.9em;
+  line-height: 1.9em;
+  margin: 0.166em;
+}
+
+.react-datepicker__navigation {
+  top: 0.8em;
+  height: 2rem;
+}
+
+.react-datepicker__navigation-icon::before,
+.react-datepicker__navigation:hover *::before {
+  top: 1rem;
+  border-color: var(--borderGray);
+}
+
+.react-datepicker__navigation-icon--previous::before,
+.react-datepicker__navigation-icon--next::before {
+  width: 0.6rem;
+  height: 0.6rem;
+}
+
+.react-datepicker__navigation--previous {
+  left: 4rem;
+}
+
+.react-datepicker__navigation--next {
+  right: 4rem;
+}
