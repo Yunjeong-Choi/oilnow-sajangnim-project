@@ -23,6 +23,8 @@ export interface payDataListProps {
 // }
 
 interface ResultListProps {
+  startDate?: Date;
+  endDate?: Date;
   payStatusKeyword: string | undefined;
   plateNumKeyword: string | undefined;
 }
@@ -35,13 +37,15 @@ const scrollViewPortHeight = 490;
 // TODO: 반응형으로 높이조절 어떻게 할까
 
 const ResultList: FunctionComponent<ResultListProps> = ({
+  startDate,
+  endDate,
   payStatusKeyword,
   plateNumKeyword,
 }) => {
   const [scrollTop, scrollContainerRef] = useScroll();
   const [page, setPage] = useState<number>(0);
   const [list, setList] = useState<payDataListProps[]>([]);
-  const [filteredList, setFilteredList] = useState<payDataListProps[]>([]);
+  const [filteredList, setFilteredList] = useState<payDataListProps[]>(list); //TODO: 이렇게 연결..?
 
   const totalItemCount = Math.max(list.length, itemInitialTotal);
   const containerHeight = Math.max(
@@ -78,23 +82,56 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   }, []);
 
   useEffect(() => {
-    //TODO: 이건 왜 필요했던 걸까
-    // if (plateNumKeyword.length === 0) {
-    //   setFilteredList([]);
-    //   return;
-    // }
-
-    const filteredList = list.filter(
-      // if (typeof plateNumKeyword === "undefined") return;
-      // 얼리리턴을 해도 되지만 아래처럼 하는게 더 간결함
+    const payStatusFilteredList = filteredList.filter(
       (item) =>
-        plateNumKeyword !== undefined &&
-        item.plateNum.includes(plateNumKeyword) &&
-        item.payStatus === payStatusKeyword //TODO: 둘중 하나만 조건이 걸렸을때는 어떻게 처리 할것인지 지정을 해줘야 함
+        typeof payStatusKeyword !== "undefined" &&
+        item.payStatus == payStatusKeyword
     );
-    console.log(filteredList, plateNumKeyword, payStatusKeyword);
-    setFilteredList(filteredList);
-  }, [plateNumKeyword, payStatusKeyword]);
+    setFilteredList(payStatusFilteredList);
+    console.log(
+      "payStatusKeyword Filtered!",
+      payStatusKeyword,
+      payStatusFilteredList
+    );
+  }, [payStatusKeyword]);
+
+  useEffect(() => {
+    const plateNumKeywordFilteredList = filteredList.filter(
+      (item) =>
+        typeof plateNumKeyword !== "undefined" &&
+        item.plateNum.includes(plateNumKeyword)
+    );
+    setFilteredList(plateNumKeywordFilteredList);
+    console.log("plateNumKeyword Filtered!", plateNumKeyword);
+  }, [plateNumKeyword]);
+
+  // useEffect(() => {
+  //TODO: 이건 왜 필요했던 걸까
+  // if (plateNumKeyword.length === 0) {
+  //   setFilteredList([]);
+  //   return;
+  // }
+
+  //   const filteredList = list.filter(
+  //     // undefined은 여러 방법으로 처리할 수 있음
+  //     // if (typeof plateNumKeyword === "undefined") return;
+  //     // plateNumKeyword !== undefined &&
+
+  //     (item) => {
+  //       if (typeof plateNumKeyword === "undefined") {
+  //         return item.payStatus === payStatusKeyword;
+  //       }
+  //       if (typeof payStatusKeyword === "undefined") {
+  //         return item.plateNum.includes(plateNumKeyword);
+  //       }
+  //       return (
+  //         item.payStatus === payStatusKeyword &&
+  //         item.plateNum.includes(plateNumKeyword) //TODO: "ㅊ"을 검색하면 결과가 없어야 하지 않나..?
+  //       );
+  //     }
+  //   );
+  //   setFilteredList(filteredList);
+  // }, [startDate, endDate, plateNumKeyword, payStatusKeyword]);
   //띄어쓰기를 무시한 검색이 가능하도록 하려면 공수가 많이 듬. 주소검색은 분류가 명확하니까 괜찮지만
   //한글자씩 검색해서 결과를 추려나갈수도 있음
   //공수를 들이는 만큼 효용이 있는가, 선택의 문제
@@ -111,6 +148,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     //SCROLLTOP
     // <ResultListBox ref={scrollContainerRef} height={scrollViewPortHeight}>
     <ResultListBox height={scrollViewPortHeight}>
+      {console.log("ResultList 렌더링 돼따")}
       <TotalItemBox height={containerHeight}>
         {/* SCROLLTOP */}
         {/* <div

@@ -17,7 +17,6 @@ const PlateNumFilter: FunctionComponent<PlateNumFilterProps> = ({
 }) => {
   const handlePlateNumInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value || undefined;
-    console.log(inputValue);
     setPlateNumKeyword(inputValue);
   };
 

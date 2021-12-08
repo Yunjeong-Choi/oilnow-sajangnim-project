@@ -4,11 +4,15 @@ import ResultHeader from "./ResultHeader";
 import ResultList from "./ResultList";
 
 interface PayResultProps {
+  startDate?: Date;
+  endDate?: Date;
   payStatusKeyword: string | undefined;
   plateNumKeyword: string | undefined;
 }
 
 const PayResult: FunctionComponent<PayResultProps> = ({
+  startDate,
+  endDate,
   payStatusKeyword,
   plateNumKeyword,
 }) => {
@@ -16,6 +20,8 @@ const PayResult: FunctionComponent<PayResultProps> = ({
     <PayResultBox>
       <ResultHeader />
       <ResultList
+        startDate={startDate}
+        endDate={endDate}
         payStatusKeyword={payStatusKeyword}
         plateNumKeyword={plateNumKeyword}
       />

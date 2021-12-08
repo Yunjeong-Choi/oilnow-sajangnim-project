@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, MouseEvent, SetStateAction } from "react";
+import { FunctionComponent, MouseEvent } from "react";
 import styled from "styled-components";
 import { parsePayStatus } from "../PayResult/ResultItem";
 
@@ -6,15 +6,22 @@ import { parsePayStatus } from "../PayResult/ResultItem";
 const statusList = Object.entries(parsePayStatus);
 
 interface statusFilterProps {
+  payStatusKeyword?: string;
   setPayStatusKeyword: (param?: string) => void;
 }
 
 const StatusFilter: FunctionComponent<statusFilterProps> = ({
+  payStatusKeyword,
   setPayStatusKeyword,
 }) => {
   const handlePayStatusClick = (event: MouseEvent<HTMLButtonElement>) => {
     const clickValue = event.currentTarget.value;
+    // if (payStatusKeyword === clickValue) {
+    //   console.log("payStatusKeyword === clickValue");
+    //   setPayStatusKeyword(undefined); //TODO: 안먹히는 이유는...?
+    // }
     setPayStatusKeyword(clickValue);
+    //TODO: status 조건을 여러개 걸 수 있도록 하려면 추가 작업이 필요함
   };
 
   return (

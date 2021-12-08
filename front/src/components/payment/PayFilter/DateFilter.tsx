@@ -1,16 +1,28 @@
 import styled from "styled-components";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
-import { useState } from "react";
+import { FunctionComponent, useState } from "react";
 
 registerLocale("ko", ko);
 setDefaultLocale("ko");
 
-type DateProps = Date | null;
+// type DateProps = Date | null;
 
-const DateFilter = () => {
-  const [startDate, setStartDate] = useState<DateProps>();
-  const [endDate, setEndDate] = useState<DateProps>();
+interface DateFilterProps {
+  startDate?: Date;
+  setStartDate: (param?: Date) => void;
+  endDate?: Date;
+  setEndDate: (param?: Date) => void;
+}
+
+const DateFilter: FunctionComponent<DateFilterProps> = ({
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+}) => {
+  // const [startDate, setStartDate] = useState<DateProps>();
+  // const [endDate, setEndDate] = useState<DateProps>();
 
   return (
     <DateFilterBox>
@@ -18,7 +30,10 @@ const DateFilter = () => {
         <StyledDatePicker
           dateFormat="yyyy.MM.dd (eee)"
           selected={startDate}
-          onChange={(date: DateProps) => setStartDate(date)}
+          onChange={(date: Date) => {
+            setStartDate(date);
+            console.log(date);
+          }}
           selectsStart
           startDate={startDate}
           endDate={endDate}
@@ -30,7 +45,7 @@ const DateFilter = () => {
         <StyledDatePicker
           dateFormat="yyyy.MM.dd (eee)"
           selected={endDate}
-          onChange={(date: DateProps) => setEndDate(date)}
+          onChange={(date: Date) => setEndDate(date)}
           selectsEnd
           startDate={startDate}
           endDate={endDate}

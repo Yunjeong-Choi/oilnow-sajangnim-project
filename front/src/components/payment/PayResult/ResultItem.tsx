@@ -53,6 +53,20 @@ const payStatusColor: parsePayStatusType = {
 const ResultItem: FunctionComponent<payDataListProps> = (props) => {
   const { payID, payStatus, payDate, plateNum, payPrice } = props;
   const payStatusKo = parsePayStatus[payStatus];
+  const toDateType = new Date(payDate);
+  const refinedYear = toDateType.getFullYear().toString().substr(2, 2);
+  const refinedMonth =
+    (toDateType.getMonth() + 1).toString().length > 1
+      ? toDateType.getMonth() + 1
+      : `0${toDateType.getMonth() + 1}`;
+  const refinedDate =
+    toDateType.getDate().toString().length > 1
+      ? toDateType.getDate()
+      : `0${toDateType.getDate()}`;
+  const dateInForm = `${refinedYear}. ${refinedMonth}. ${refinedDate}`;
+  // console.log(payDate, Number(new Date(payDate)));
+  // const dateformat = require("dateformat"); //TODO: 이거.. 써도 되는건가...?
+  // dateformat(typeOfDate, "yy. mm. dd");
 
   return (
     <ResultItemBox>
@@ -61,7 +75,7 @@ const ResultItem: FunctionComponent<payDataListProps> = (props) => {
           {payStatusKo}
         </StyledPayStatus>
       </div>
-      <div>{payDate}</div>
+      <div>{dateInForm}</div>
       <div>{plateNum}</div>
       <div>{payPrice}</div>
       <div>
