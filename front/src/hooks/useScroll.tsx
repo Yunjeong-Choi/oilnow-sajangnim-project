@@ -1,4 +1,4 @@
-import { UIEvent, useEffect, useRef, useState } from "react";
+import { SyntheticEvent, UIEvent, useEffect, useRef, useState } from "react";
 import useThrottle from "./useThrottle";
 
 const useScroll = () => {
@@ -6,6 +6,7 @@ const useScroll = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (e: UIEvent<HTMLElement>) => {
+    // const curScrollTop = e.target.scrollTop;
     const curScrollTop = e.currentTarget.scrollTop;
     console.log("scroll!", curScrollTop);
     requestAnimationFrame(() => {
@@ -13,7 +14,6 @@ const useScroll = () => {
     });
   };
 
-  //TODO: 타입과 얼리리턴 확인 필요
   const throttleOnScroll = useThrottle((e?: UIEvent<HTMLElement>) => {
     if (!e) return;
     console.log("Throttled!");

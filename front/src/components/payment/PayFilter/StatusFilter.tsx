@@ -5,12 +5,12 @@ import { parsePayStatus } from "../PayResult/ResultItem";
 // const statusList = ["결제대기", "결제완료", "취소요청", "취소완료"];
 const statusList = Object.entries(parsePayStatus);
 
-interface statusFilterProps {
+interface StatusFilterProps {
   payStatusKeyword?: string;
   setPayStatusKeyword: (param?: string) => void;
 }
 
-const StatusFilter: FunctionComponent<statusFilterProps> = ({
+const StatusFilter: FunctionComponent<StatusFilterProps> = ({
   payStatusKeyword,
   setPayStatusKeyword,
 }) => {

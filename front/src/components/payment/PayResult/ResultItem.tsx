@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import styled from "styled-components";
 import bracketRight from "../../../assets/images/bracketRight-icon.png";
 import { Link } from "react-router-dom";
-import { payDataListProps } from "./ResultList";
+import { PayDataListProps } from "./ResultList";
 
 // type PayStatusKey =
 //   | "waitForPaid"
@@ -10,32 +10,32 @@ import { payDataListProps } from "./ResultList";
 //   | "cancelRequest"
 //   | "cancelCompleted";
 // type PayStatusKoValue = "결제대기" | "결제완료" | "취소요청" | "취소완료";
-// interface parsePayStatusType {
+// interface ParsePayStatusType {
 //   [key in PayStatusKey]: PayStatusKoValue;
 // }
 //TODO: 이건 왜 안될까요...
 //in은 내부에 있는 모든 타입을 가져온다. (자바스크립트의 문법)
 //record를 쓰는게 더 가독성이 있음
 
-interface parsePayStatusType {
+interface ParsePayStatusType {
   [key: string]: string;
 }
 
-export const parsePayStatus: parsePayStatusType = {
+export const parsePayStatus: ParsePayStatusType = {
   waitForPaid: "결제대기",
   paid: "결제완료",
   cancelRequest: "취소요청",
   cancelCompleted: "취소완료",
 };
 
-const payStatusColor: parsePayStatusType = {
+const payStatusColor: ParsePayStatusType = {
   결제대기: "rgba(253, 215, 81, 0.88)",
   결제완료: "#74D186",
   취소요청: "rgba(244, 44, 16, 0.51)",
   취소완료: "#C4C4C4",
 };
 
-// const parsePayStatus: parsePayStatusType = {
+// const parsePayStatus: ParsePayStatusType = {
 //   waitForPaid: { ko: "결제대기", co: "red" },
 //   paid: { ko: "결제완료", co: "yellow" },
 //   cancelRequest: { ko: "취소요청", co: "blue" },
@@ -50,7 +50,7 @@ const payStatusColor: parsePayStatusType = {
 //   payPrice: number;
 // }
 
-const ResultItem: FunctionComponent<payDataListProps> = (props) => {
+const ResultItem: FunctionComponent<PayDataListProps> = (props) => {
   const { payID, payStatus, payDate, plateNum, payPrice } = props;
   const payStatusKo = parsePayStatus[payStatus];
   const toDateType = new Date(payDate);

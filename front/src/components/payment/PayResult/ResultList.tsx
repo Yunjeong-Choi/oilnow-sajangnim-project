@@ -4,11 +4,7 @@ import { FunctionComponent, useEffect, useState, useCallback } from "react";
 import fetchData from "../../../api/fetchData";
 import useScroll from "../../../hooks/useScroll";
 
-//TODO: 타입만 따로 모아서 저장하기도 하나..? 그렇다면 파일명을 how?
-// model.ts OR types 폴더의 파일명.d.ts (파일단위로)
-
-//TODO: 타입은 모두 대문자로
-export interface payDataListProps {
+export interface PayDataListProps {
   payID: number;
   payStatus: string;
   payDate: string;
@@ -27,12 +23,11 @@ interface ResultListProps {
   plateNumKeyword: string | undefined;
 }
 
-const itemHeight = 45;
 const itemViewPortCount = 10;
 const itemPaddingCount = 10;
 const itemInitialTotal = itemViewPortCount + itemPaddingCount;
-const scrollViewPortHeight = 490;
-// TODO: 반응형으로 높이조절 어떻게 할까
+const itemHeight = 45;
+const scrollViewPortHeight = 490; // TODO: 반응형으로 높이조절 어떻게 할까
 
 const ResultList: FunctionComponent<ResultListProps> = ({
   startDate,
@@ -42,8 +37,8 @@ const ResultList: FunctionComponent<ResultListProps> = ({
 }) => {
   const { scrollTop, scrollContainerRef } = useScroll();
   const [page, setPage] = useState<number>(0);
-  const [list, setList] = useState<payDataListProps[]>([]); //filteredList가 주로 사용된다 하더라도 원본 데이터는 유지되어야 함
-  const [filteredList, setFilteredList] = useState<payDataListProps[]>([]);
+  const [list, setList] = useState<PayDataListProps[]>([]); //filteredList가 주로 사용된다 하더라도 원본 데이터는 유지되어야 함
+  const [filteredList, setFilteredList] = useState<PayDataListProps[]>([]);
 
   const totalItemCount = Math.max(list.length, itemInitialTotal);
   const containerHeight = Math.max(
@@ -54,34 +49,16 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     Math.floor(scrollTop / itemHeight) - itemPaddingCount,
     0
   );
+  const offsetY = startIndex * itemHeight;
   const visibleNodes = list.slice(
     startIndex,
     startIndex +
       Math.floor(scrollViewPortHeight / itemHeight) +
       2 * itemPaddingCount
   );
-  const offsetY = startIndex * itemHeight;
-
-  const getData = useCallback(async () => {
-    try {
-      const data = await fetchData();
-      const { payData } = data;
-      setList(payData);
-      setFilteredList(payData);
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-
-  //getData를 실행시키는 부분
-  useEffect(() => {
-    getData();
-    // 만약 무한스크롤이 fire 되는 순간 payStatusKeyword와 같은 필터 조건을 다시 콜해줘야 함.
-    // filterPlateNumKeyword();
-  }, []);
 
   const filterData = () => {
-    const filteredList = list.reduce<payDataListProps[]>((acc, cur) => {
+    const filteredList = list.reduce<PayDataListProps[]>((acc, cur) => {
       const payStatusKeywordCondition = payStatusKeyword
         ? cur.payStatus === payStatusKeyword
         : true;
@@ -110,34 +87,46 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     setFilteredList(filteredList);
   };
 
+  const getData = useCallback(async () => {
+    try {
+      const payData = await fetchData(page);
+      console.log("getData!", payData);
+      setList(list.concat(payData));
+      setFilteredList(list.concat(payData));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [page]);
+
+  //getData를 실행시키는 부분
+  //TODO: 왜 getData가 4번씩 실행이 될까
+  useEffect(() => {
+    getData();
+    // 만약 무한스크롤이 fire 되는 순간 payStatusKeyword와 같은 필터 조건을 다시 콜해줘야 함.
+    // filterPlateNumKeyword();
+    // filterData();
+  }, [page]);
+
   useEffect(() => {
     filterData();
   }, [payStatusKeyword, plateNumKeyword, startDate, endDate]);
 
-  // useEffect(() => {
-  //   const BUFFER_AREA = scrollViewPortHeight / 3;
-  //   if (scrollTop + scrollViewPortHeight >= containerHeight - BUFFER_AREA) {
-  //     setPage(page + 1);
-  //   }
-  // }, [scrollTop]);
-
   return (
-    //SCROLLTOP
-    // <ResultListBox ref={scrollContainerRef} height={scrollViewPortHeight}>
-    <ResultListBox height={scrollViewPortHeight}>
+    <ResultListBox ref={scrollContainerRef} height={scrollViewPortHeight}>
       <TotalItemBox height={containerHeight}>
-        {/* SCROLLTOP */}
-        {/* <div
-          style={{
-            position: "absolute",
-            width: "100%",
-            transform: `translateY(${offsetY}px)`,
-          }}
-        > */}
-        {filteredList.map((item) => (
-          <ResultItem key={item.payID} {...item} />
-        ))}
-        {/* </div> */}
+        <VisibleContentsBox offsetY={offsetY}>
+          {/* {payStatusKeyword || plateNumKeyword || startDate || endDate
+            ? filteredList.map((item) => (
+                <ResultItem key={item.payID} {...item} />
+              ))
+            : visibleNodes.map((item) => (
+                <ResultItem key={item.payID} {...item} />
+              ))} */}
+          {visibleNodes.map((item) => (
+            // {filteredList.map((item) => (
+            <ResultItem key={item.payID} {...item} />
+          ))}
+        </VisibleContentsBox>
       </TotalItemBox>
     </ResultListBox>
   );
@@ -146,20 +135,19 @@ const ResultList: FunctionComponent<ResultListProps> = ({
 export default ResultList;
 
 //styled-components
-
-// interface ResultListBoxProps {
-//   pHeight: number;
-//   overflowY: string
-// }
-//타입에 쉼표가 자꾸 세미콜론으로 바뀜 -> 인터페이스로 지정한다. 린트때문인듯
 const ResultListBox = styled.div<{ height: number }>`
   height: ${(props) => `${props.height}px`};
-  /*높이가 안 먹히고 있음 -> 단위 인식을 못하는 것으로 추측 */
-  overflow-y: auto; //하위 요소가 부모요소를 넘어서면 스크롤이 생기도록
+  overflow-y: auto;
   padding-right: 1.2rem;
 `;
 
 const TotalItemBox = styled.div<{ height: number }>`
   height: ${(props) => `${props.height}px`};
-  position: "relative";
+  position: relative;
+`;
+
+const VisibleContentsBox = styled.div<{ offsetY: number }>`
+  position: absolute;
+  width: 100%;
+  transform: translateY(${(props) => props.offsetY}px);
 `;

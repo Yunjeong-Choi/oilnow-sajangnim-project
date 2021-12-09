@@ -66,7 +66,7 @@ const ResultHeaderBox = styled.div`
     padding-top: 0.125em;
     background-image: url("../../../assets/images/arrowDown-icon.png") no-repeat
       95% 50%;
-    /* TODOs: 하... 왜 배경에 안먹니... */
+    /* TODO: 하... 왜 배경에 안먹니... */
     /* background-color: transparent; */
     /* background-repeat: no-repeat; */
     /* background-size: 90%; */
