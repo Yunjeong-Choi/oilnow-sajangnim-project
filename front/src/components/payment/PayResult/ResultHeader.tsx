@@ -10,11 +10,11 @@ const ResultHeader = () => {
         <div key={title}>{title}</div>
       ))}
       <div>
-        <select>
-          <option>정렬</option>
+        상세보기
+        {/* <select>
           <option>최신순</option>
           <option>오래된순</option>
-        </select>
+        </select> */}
       </div>
     </ResultHeaderBox>
   );
@@ -64,7 +64,6 @@ const ResultHeaderBox = styled.div`
     height: 2rem;
     margin-top: 0.1rem;
     padding-top: 0.125em;
-    padding-left: 15%;
     background-image: url("../../../assets/images/arrowDown-icon.png") no-repeat
       95% 50%;
     /* TODOs: 하... 왜 배경에 안먹니... */
@@ -72,7 +71,7 @@ const ResultHeaderBox = styled.div`
     /* background-repeat: no-repeat; */
     /* background-size: 90%; */
     /* background-position: 97% 50%/15px auto; */
-    text-align: left;
+    text-align: center;
     font-weight: 500;
     font-size: 1.2rem;
     line-height: 1.7rem;

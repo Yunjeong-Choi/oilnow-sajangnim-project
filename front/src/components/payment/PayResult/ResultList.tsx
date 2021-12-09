@@ -7,6 +7,7 @@ import useScroll from "../../../hooks/useScroll";
 //TODO: 타입만 따로 모아서 저장하기도 하나..? 그렇다면 파일명을 how?
 // model.ts OR types 폴더의 파일명.d.ts (파일단위로)
 
+//TODO: 타입은 모두 대문자로
 export interface payDataListProps {
   payID: number;
   payStatus: string;
@@ -41,7 +42,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
 }) => {
   const { scrollTop, scrollContainerRef } = useScroll();
   const [page, setPage] = useState<number>(0);
-  const [list, setList] = useState<payDataListProps[]>([]);
+  const [list, setList] = useState<payDataListProps[]>([]); //filteredList가 주로 사용된다 하더라도 원본 데이터는 유지되어야 함
   const [filteredList, setFilteredList] = useState<payDataListProps[]>([]);
 
   const totalItemCount = Math.max(list.length, itemInitialTotal);
