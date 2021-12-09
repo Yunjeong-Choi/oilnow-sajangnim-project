@@ -16,10 +16,10 @@ const StatusFilter: FunctionComponent<statusFilterProps> = ({
 }) => {
   const handlePayStatusClick = (event: MouseEvent<HTMLButtonElement>) => {
     const clickValue = event.currentTarget.value;
-    // if (payStatusKeyword === clickValue) {
-    //   console.log("payStatusKeyword === clickValue");
-    //   setPayStatusKeyword(undefined); //TODO: 안먹히는 이유는...?
-    // }
+    if (payStatusKeyword === clickValue) {
+      setPayStatusKeyword(undefined); //TODO: 안먹히는 이유는...?
+      return;
+    }
     setPayStatusKeyword(clickValue);
     //TODO: status 조건을 여러개 걸 수 있도록 하려면 추가 작업이 필요함
   };

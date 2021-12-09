@@ -4,7 +4,8 @@ import { FunctionComponent, useEffect, useState, useCallback } from "react";
 import fetchData from "../../../api/fetchData";
 import useScroll from "../../../hooks/useScroll";
 
-//TODO: 타입만 따로 모아서 저장하기도 하나요..? 그렇다면 파일명을 how?
+//TODO: 타입만 따로 모아서 저장하기도 하나..? 그렇다면 파일명을 how?
+// model.ts OR types 폴더의 파일명.d.ts (파일단위로)
 
 export interface payDataListProps {
   payID: number;
@@ -17,10 +18,6 @@ export interface payDataListProps {
   cancelImgURL: string;
   cancelClaim: string;
 }
-
-// interface responseType {
-//   payData: [];
-// }
 
 interface ResultListProps {
   startDate?: Date;
@@ -42,35 +39,34 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   payStatusKeyword,
   plateNumKeyword,
 }) => {
-  const [scrollTop, scrollContainerRef] = useScroll();
+  const { scrollTop, scrollContainerRef } = useScroll();
   const [page, setPage] = useState<number>(0);
   const [list, setList] = useState<payDataListProps[]>([]);
-  const [filteredList, setFilteredList] = useState<payDataListProps[]>(list); //TODO: 이렇게 연결..?
+  const [filteredList, setFilteredList] = useState<payDataListProps[]>([]);
 
   const totalItemCount = Math.max(list.length, itemInitialTotal);
   const containerHeight = Math.max(
     scrollViewPortHeight,
     itemHeight * totalItemCount
   );
-  //SCROLLTOP
-  // const startIndex = Math.max(
-  //   Math.floor(scrollTop / itemHeight) - itemPaddingCount,
-  //   0
-  // );
-  // const visibleNodes = list.slice(
-  //   startIndex,
-  //   startIndex +
-  //     Math.floor(scrollViewPortHeight / itemHeight) +
-  //     2 * itemPaddingCount
-  // );
-  // const offsetY = startIndex * itemHeight;
+  const startIndex = Math.max(
+    Math.floor(scrollTop / itemHeight) - itemPaddingCount,
+    0
+  );
+  const visibleNodes = list.slice(
+    startIndex,
+    startIndex +
+      Math.floor(scrollViewPortHeight / itemHeight) +
+      2 * itemPaddingCount
+  );
+  const offsetY = startIndex * itemHeight;
 
   const getData = useCallback(async () => {
     try {
       const data = await fetchData();
       const { payData } = data;
       setList(payData);
-      console.log(payData);
+      setFilteredList(payData);
     } catch (e) {
       console.error(e);
     }
@@ -79,64 +75,44 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   //getData를 실행시키는 부분
   useEffect(() => {
     getData();
+    // 만약 무한스크롤이 fire 되는 순간 payStatusKeyword와 같은 필터 조건을 다시 콜해줘야 함.
+    // filterPlateNumKeyword();
   }, []);
 
-  useEffect(() => {
-    const payStatusFilteredList = filteredList.filter(
-      (item) =>
-        typeof payStatusKeyword !== "undefined" &&
-        item.payStatus == payStatusKeyword
-    );
-    setFilteredList(payStatusFilteredList);
-    console.log(
-      "payStatusKeyword Filtered!",
-      payStatusKeyword,
-      payStatusFilteredList
-    );
-  }, [payStatusKeyword]);
+  const filterData = () => {
+    const filteredList = list.reduce<payDataListProps[]>((acc, cur) => {
+      const payStatusKeywordCondition = payStatusKeyword
+        ? cur.payStatus === payStatusKeyword
+        : true;
+      const payNumKeywordCondition =
+        plateNumKeyword && plateNumKeyword.length > 0
+          ? cur.plateNum.includes(plateNumKeyword)
+          : true;
+      const startDateCondition = startDate
+        ? startDate.getTime() - new Date(cur.payDate).getTime() <= 0
+        : true;
+      const endDateCondition = endDate
+        ? endDate.getTime() - new Date(cur.payDate).getTime() >= 0
+        : true;
+
+      if (
+        payStatusKeywordCondition &&
+        payNumKeywordCondition &&
+        startDateCondition &&
+        endDateCondition
+      ) {
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
+
+    setFilteredList(filteredList);
+  };
 
   useEffect(() => {
-    const plateNumKeywordFilteredList = filteredList.filter(
-      (item) =>
-        typeof plateNumKeyword !== "undefined" &&
-        item.plateNum.includes(plateNumKeyword)
-    );
-    setFilteredList(plateNumKeywordFilteredList);
-    console.log("plateNumKeyword Filtered!", plateNumKeyword);
-  }, [plateNumKeyword]);
+    filterData();
+  }, [payStatusKeyword, plateNumKeyword, startDate, endDate]);
 
-  // useEffect(() => {
-  //TODO: 이건 왜 필요했던 걸까
-  // if (plateNumKeyword.length === 0) {
-  //   setFilteredList([]);
-  //   return;
-  // }
-
-  //   const filteredList = list.filter(
-  //     // undefined은 여러 방법으로 처리할 수 있음
-  //     // if (typeof plateNumKeyword === "undefined") return;
-  //     // plateNumKeyword !== undefined &&
-
-  //     (item) => {
-  //       if (typeof plateNumKeyword === "undefined") {
-  //         return item.payStatus === payStatusKeyword;
-  //       }
-  //       if (typeof payStatusKeyword === "undefined") {
-  //         return item.plateNum.includes(plateNumKeyword);
-  //       }
-  //       return (
-  //         item.payStatus === payStatusKeyword &&
-  //         item.plateNum.includes(plateNumKeyword) //TODO: "ㅊ"을 검색하면 결과가 없어야 하지 않나..?
-  //       );
-  //     }
-  //   );
-  //   setFilteredList(filteredList);
-  // }, [startDate, endDate, plateNumKeyword, payStatusKeyword]);
-  //띄어쓰기를 무시한 검색이 가능하도록 하려면 공수가 많이 듬. 주소검색은 분류가 명확하니까 괜찮지만
-  //한글자씩 검색해서 결과를 추려나갈수도 있음
-  //공수를 들이는 만큼 효용이 있는가, 선택의 문제
-
-  //SCROLLTOP
   // useEffect(() => {
   //   const BUFFER_AREA = scrollViewPortHeight / 3;
   //   if (scrollTop + scrollViewPortHeight >= containerHeight - BUFFER_AREA) {
@@ -148,7 +124,6 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     //SCROLLTOP
     // <ResultListBox ref={scrollContainerRef} height={scrollViewPortHeight}>
     <ResultListBox height={scrollViewPortHeight}>
-      {console.log("ResultList 렌더링 돼따")}
       <TotalItemBox height={containerHeight}>
         {/* SCROLLTOP */}
         {/* <div
@@ -158,7 +133,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
             transform: `translateY(${offsetY}px)`,
           }}
         > */}
-        {(filteredList.length > 0 ? filteredList : list).map((item) => (
+        {filteredList.map((item) => (
           <ResultItem key={item.payID} {...item} />
         ))}
         {/* </div> */}

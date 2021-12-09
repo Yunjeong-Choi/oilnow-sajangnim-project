@@ -3,7 +3,7 @@ import useThrottle from "./useThrottle";
 
 const useScroll = () => {
   const [scrollTop, setScrollTop] = useState(0);
-  const ref = useRef<HTMLDivElement>();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (e: UIEvent<HTMLElement>) => {
     const curScrollTop = e.currentTarget.scrollTop;
@@ -21,8 +21,8 @@ const useScroll = () => {
   });
 
   useEffect(() => {
-    if (!ref.current) return;
-    const scrollContainer = ref.current;
+    if (!scrollContainerRef.current) return;
+    const scrollContainer = scrollContainerRef.current;
     // INTO: THROTTLE SCROLL
     scrollContainer.addEventListener("scroll", throttleOnScroll);
     // INTO: RAW SCROLL
@@ -36,7 +36,7 @@ const useScroll = () => {
     };
   }, []);
 
-  return [scrollTop, ref];
+  return { scrollTop, scrollContainerRef };
 };
 
 export default useScroll;

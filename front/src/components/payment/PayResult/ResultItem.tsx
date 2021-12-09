@@ -65,7 +65,9 @@ const ResultItem: FunctionComponent<payDataListProps> = (props) => {
       : `0${toDateType.getDate()}`;
   const dateInForm = `${refinedYear}. ${refinedMonth}. ${refinedDate}`;
   // console.log(payDate, Number(new Date(payDate)));
-  // const dateformat = require("dateformat"); //TODO: 이거.. 써도 되는건가...?
+  // dns-date
+  // const dateformat = require("dateformat"); //TODO: 이거.. 써도 되는건가...? ㄴ
+  // -> date-fns
   // dateformat(typeOfDate, "yy. mm. dd");
 
   return (
@@ -103,20 +105,29 @@ const ResultItemBox = styled.div`
 
   > div {
     flex-grow: 1;
-    width: 6.5rem;
     text-align: center;
-    padding: 0.5rem;
+    padding: 0.25rem;
 
     :first-child {
-      padding: 0 0.5rem;
+      width: 6.5rem;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    :nth-of-type(2) {
+      width: 7rem;
+    }
+
+    :nth-of-type(3) {
+      width: 8rem;
     }
 
     :nth-of-type(4) {
-      width: 4rem;
+      width: 4.5rem;
     }
 
     :last-child {
-      width: 3.5rem;
+      width: 4rem;
     }
   }
 

@@ -5,7 +5,7 @@ import PlateNumFilter from "./PlateNumFilter";
 import { FunctionComponent } from "react";
 
 interface PayFilterProps {
-  startDate?: Date; //TODO: 이렇게 쓰는게 맞는지
+  startDate?: Date;
   setStartDate: (param?: Date) => void;
   endDate?: Date;
   setEndDate: (param?: Date) => void;
@@ -49,7 +49,6 @@ const PayFilterBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 1.2rem;
-  /* padding-bottom: 1.5rem; */
   background-color: white;
 
   span {

@@ -26,33 +26,45 @@ export default ResultHeader;
 const ResultHeaderBox = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 1rem 1rem 0;
+  padding: 0 0.5rem 1rem 0;
   border-bottom: 0.07rem solid var(--borderGray);
 
   > div {
-    width: 6.5rem;
     flex-grow: 1;
     text-align: center;
     font-weight: 500;
     font-size: 1.2rem;
     line-height: 1.7rem;
 
+    :first-child {
+      width: 6.5rem;
+    }
+
+    :nth-of-type(2) {
+      width: 7rem;
+    }
+
+    :nth-of-type(3) {
+      width: 8rem;
+    }
+
     :nth-of-type(4) {
-      width: 4rem;
+      width: 4.5rem;
     }
 
     :last-child {
-      width: 3.5rem;
+      width: 5rem;
+      padding: 0 0.5rem;
     }
   }
 
   select {
-    width: 60%;
-    min-width: 4.8rem;
+    width: 100%;
+    max-width: 10rem;
     height: 2rem;
     margin-top: 0.1rem;
     padding-top: 0.125em;
-    padding-right: 1rem;
+    padding-left: 15%;
     background-image: url("../../../assets/images/arrowDown-icon.png") no-repeat
       95% 50%;
     /* TODOs: 하... 왜 배경에 안먹니... */
@@ -60,7 +72,7 @@ const ResultHeaderBox = styled.div`
     /* background-repeat: no-repeat; */
     /* background-size: 90%; */
     /* background-position: 97% 50%/15px auto; */
-    text-align: center;
+    text-align: left;
     font-weight: 500;
     font-size: 1.2rem;
     line-height: 1.7rem;
