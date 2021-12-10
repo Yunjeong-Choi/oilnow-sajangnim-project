@@ -42,14 +42,6 @@ const payStatusColor: ParsePayStatusType = {
 //   cancelCompleted: { ko: "취소완료", co: "green" },
 // };
 
-// interface ResultItemProps {
-//   payID: number;
-//   payStatus: string;
-//   payDate: string;
-//   plateNum: string;
-//   payPrice: number;
-// }
-
 const ResultItem: FunctionComponent<PayDataListProps> = (props) => {
   const { payID, payStatus, payDate, plateNum, payPrice } = props;
   const payStatusKo = parsePayStatus[payStatus];

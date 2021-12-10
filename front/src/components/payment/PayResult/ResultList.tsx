@@ -12,7 +12,7 @@ export interface PayDataListProps {
   payPrice: number;
   orderDetail: string;
   cancelReason: string;
-  cancelImgURL: string;
+  cancelImgURL: [];
   cancelClaim: string;
 }
 
@@ -106,6 +106,13 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     // filterPlateNumKeyword();
     // filterData();
   }, [page]);
+
+  useEffect(() => {
+    const BUFFER_AREA = scrollViewPortHeight / 3;
+    if (scrollTop + scrollViewPortHeight >= containerHeight - BUFFER_AREA) {
+      setPage(page + 1);
+    }
+  }, [scrollTop]);
 
   useEffect(() => {
     filterData();
