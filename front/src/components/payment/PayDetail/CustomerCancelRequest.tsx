@@ -2,50 +2,89 @@ import { useLocation } from "react-router";
 import styled from "styled-components";
 import { PayDetailInnerBox } from "./PayDetailInfo";
 import noImage from "../../../assets/images/noImage-icon.jpg";
-import { useEffect, useRef } from "react";
-import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
+import useLazyImage from "../../../hooks/useLazyImage";
+
+interface LazyImageProps {
+  observer: IntersectionObserver | null;
+  src: string;
+  alt: string;
+}
 
 const CustomerCancelRequest = () => {
   const location = useLocation();
   const { cancelClaim, cancelImgURL } = location.state;
-  console.log(cancelClaim, cancelImgURL, location.state);
-  const ref = useRef<HTMLDivElement>(null);
+  const [imageObserver, setImageObserver] =
+    useState<IntersectionObserver | null>(null);
 
-  // const isIntersecting = useIntersectionObserver;
+  const LazyImage: FunctionComponent<LazyImageProps> = ({
+    observer,
+    src,
+    alt = "no image",
+  }) => {
+    const imageEl = useRef(null);
+    if (!observer) return null;
+
+    useEffect(() => {
+      const { current } = imageEl;
+      if (!current) return;
+
+      if (observer !== null) {
+        observer.observe(current);
+      }
+
+      return () => {
+        observer.unobserve(current); //TODO: ㅇㅣ게 왜 함수으로 리턴되어야 하는지?
+      };
+    }, [observer]);
+
+    return (
+      <RequestImgBox>
+        <img ref={imageEl} data-src={src} src={noImage} alt={alt}></img>
+      </RequestImgBox>
+    );
+  };
+
+  useEffect(() => {
+    const imageObserver = useLazyImage();
+    setImageObserver(imageObserver);
+
+    return () => {
+      imageObserver.disconnect();
+    };
+  }, []);
 
   return (
     <PayDetailInnerBox>
       <span>고객 취소 요청</span>
       <RequestDetail>
-        <RequestText>{cancelClaim}</RequestText>
-        {cancelImgURL.length === 0 ? (
-          <RequestImg>
-            <span>이미지 없음</span>
-          </RequestImg>
+        {cancelClaim.length === 0 ? (
+          <RequestText>없음</RequestText>
         ) : (
+          <RequestText>{cancelClaim}</RequestText>
+        )}
+        {cancelImgURL.length === 0 ? (
           <RequestImgBox>
+            <span>이미지 없음</span>
+          </RequestImgBox>
+        ) : (
+          <RequestImgList className="RequestImgBox">
             {/* TODO: 이미지 클릭하면 크게 볼 수 있는 라이브러리? 필요 */}
             {cancelImgURL.map((image: string, index: number) => (
-              <RequestImg key={index} ref={ref}>
-                <img src={image || noImage} alt="cancel img url"></img>
-              </RequestImg>
+              <LazyImage
+                key={index}
+                observer={imageObserver}
+                src={image}
+                alt="cancel img url"
+              />
             ))}
-          </RequestImgBox>
+            {/* TODO: load more 버튼 넣어야 함 */}
+          </RequestImgList>
         )}
       </RequestDetail>
     </PayDetailInnerBox>
   );
 };
-
-/**
- * 1. intersectionObserver로 div 감시
- * 2. 스크롤을 통해 감시영역 안으로 들어옴
- * 3. 감지되면 src를 요청
- * 4. lazyLoading...
- * */
-// lazy ? (
-//   <div style={{ width: 100, height: 100, color: "gray" }} />
-// ) :
 
 export default CustomerCancelRequest;
 
@@ -67,13 +106,13 @@ const RequestText = styled.div`
   line-height: 2rem;
 `;
 
-const RequestImgBox = styled.div`
+const RequestImgList = styled.div`
   padding-bottom: 1.5rem;
   display: flex;
   overflow: auto;
 `;
 
-const RequestImg = styled.div`
+const RequestImgBox = styled.div`
   width: 8rem;
   height: 8rem;
   display: flex;
@@ -85,7 +124,7 @@ const RequestImg = styled.div`
   margin-right: 1rem;
 
   span {
-    font-size: 1rem;
+    font-size: 1.4rem;
   }
 
   img {
