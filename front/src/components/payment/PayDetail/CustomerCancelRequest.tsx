@@ -16,6 +16,7 @@ const CustomerCancelRequest = () => {
   const { cancelClaim, cancelImgURL } = location.state;
   const [imageObserver, setImageObserver] =
     useState<IntersectionObserver | null>(null);
+  const [translateX, setTranslateX] = useState<number>(0);
 
   const LazyImage: FunctionComponent<LazyImageProps> = ({
     observer,
@@ -39,7 +40,7 @@ const CustomerCancelRequest = () => {
     }, [observer]);
 
     return (
-      <RequestImgBox>
+      <RequestImgBox translateX={translateX}>
         <img ref={imageEl} data-src={src} src={noImage} alt={alt}></img>
       </RequestImgBox>
     );
@@ -64,11 +65,11 @@ const CustomerCancelRequest = () => {
           <RequestText>{cancelClaim}</RequestText>
         )}
         {cancelImgURL.length === 0 ? (
-          <RequestImgBox>
+          <RequestImgBox translateX={0}>
             <span>이미지 없음</span>
           </RequestImgBox>
         ) : (
-          <RequestImgList className="RequestImgBox">
+          <RequestImgList className="RequestImgList">
             {/* TODO: 이미지 클릭하면 크게 볼 수 있는 라이브러리? 필요 */}
             {cancelImgURL.map((image: string, index: number) => (
               <LazyImage
@@ -78,7 +79,6 @@ const CustomerCancelRequest = () => {
                 alt="cancel img url"
               />
             ))}
-            {/* TODO: load more 버튼 넣어야 함 */}
           </RequestImgList>
         )}
       </RequestDetail>
@@ -109,10 +109,21 @@ const RequestText = styled.div`
 const RequestImgList = styled.div`
   padding-bottom: 1.5rem;
   display: flex;
-  overflow: auto;
+  overflow-x: scroll;
+
+  ::-webkit-scrollbar {
+    height: 1.3rem;
+    /* border-radius: 0.4rem; */
+    border: 0.07rem solid var(--borderGray);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--borderGray);
+    border-radius: 1rem;
+  }
 `;
 
-const RequestImgBox = styled.div`
+const RequestImgBox = styled.div<{ translateX: number }>`
   width: 8rem;
   height: 8rem;
   display: flex;

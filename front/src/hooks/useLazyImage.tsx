@@ -18,7 +18,7 @@ const useLazyImage = (
   newOptions = {}
 ) => {
   const defaultOptions: IntersectionObserverInit = {
-    root: document.querySelector(".RequestImgBox"),
+    root: document.querySelector(".RequestImgList"),
     threshold: 1,
   };
 

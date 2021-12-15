@@ -19,7 +19,7 @@ const PayDetailInfo = () => {
           <div>{payDate || "-"}</div>
           <div>{plateNum || "-"}</div>
           <div>{orderDetail || "-"}</div>
-          <div>{payPrice || "-"}</div>
+          <div>{`${payPrice}원` || "-"}</div>
         </TableContent>
       </InfoTable>
     </PayDetailInnerBox>

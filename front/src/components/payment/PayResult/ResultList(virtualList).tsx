@@ -43,7 +43,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
 
   //수치값
   const itemHeight = 45;
-  const nodePadding = 20;
+  const nodePadding = 20; //TODO: 이걸 충분히 늘려줬음에도 스크롤시 자글자글 거리는 이유는?ㅠㅠ
   const scrollViewPortHeight = 490;
   const [totalContainerHeight, setTotalContainerHeight] = useState<number>(0);
   const { scrollTop, scrollContainerRef } = useScroll(
