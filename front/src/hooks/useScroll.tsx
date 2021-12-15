@@ -1,42 +1,32 @@
-import { SyntheticEvent, UIEvent, useEffect, useRef, useState } from "react";
-import useThrottle from "./useThrottle";
+import { useEffect, useRef, useState } from "react";
+import { PayDataListProps } from "../components/payment/PayResult/ResultList";
 
-const useScroll = () => {
-  const [scrollTop, setScrollTop] = useState(0);
+const useScroll = (itemHeight: number, list: PayDataListProps[]) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const scrollContainer = scrollContainerRef.current;
+  const [containerHeight, setContainerHeight] = useState<number>(
+    itemHeight * 30
+  );
+  const [scrollTop, setScrollTop] = useState<number>(0);
 
-  const handleScroll = (e: UIEvent<HTMLElement>) => {
-    // const curScrollTop = e.target.scrollTop;
-    const curScrollTop = e.currentTarget.scrollTop;
-    console.log("scroll!", curScrollTop);
-    requestAnimationFrame(() => {
-      setScrollTop(curScrollTop);
-    });
+  const handleScrollHeight = () => {
+    if (!scrollContainer)
+      return console.log("no scrollContainer", "handleScrollHeight");
+
+    setContainerHeight(scrollContainer.scrollHeight);
+    setScrollTop(scrollContainer.scrollTop);
   };
 
-  const throttleOnScroll = useThrottle((e?: UIEvent<HTMLElement>) => {
-    if (!e) return;
-    console.log("Throttled!");
-    handleScroll(e);
-  });
-
   useEffect(() => {
-    if (!scrollContainerRef.current) return;
-    const scrollContainer = scrollContainerRef.current;
-    // INTO: THROTTLE SCROLL
-    scrollContainer.addEventListener("scroll", throttleOnScroll);
-    // INTO: RAW SCROLL
-    // scrollContainer.addEventListener("scroll", handleScroll);
-    setScrollTop(scrollContainer.scrollTop);
+    if (!scrollContainer)
+      return console.log("no scrollContainer", "addEventListener");
 
-    return () => {
-      // TODO: 왜 remove를 할까
-      scrollContainer.removeEventListener("scroll", throttleOnScroll);
-      // scrollContainer.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    scrollContainer.addEventListener("scroll", handleScrollHeight);
+    return () =>
+      scrollContainer.removeEventListener("scroll", handleScrollHeight);
+  }, [list]);
 
-  return { scrollTop, scrollContainerRef };
+  return { scrollTop, containerHeight, scrollContainerRef };
 };
 
 export default useScroll;

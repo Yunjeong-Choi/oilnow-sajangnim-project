@@ -27,7 +27,6 @@ const DateFilter: FunctionComponent<DateFilterProps> = ({
           selected={startDate}
           onChange={(date: Date) => {
             setStartDate(date);
-            console.log(date);
           }}
           selectsStart
           startDate={startDate}

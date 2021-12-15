@@ -35,15 +35,12 @@ const payStatusColor: ParsePayStatusType = {
   취소완료: "#C4C4C4",
 };
 
-// const parsePayStatus: ParsePayStatusType = {
-//   waitForPaid: { ko: "결제대기", co: "red" },
-//   paid: { ko: "결제완료", co: "yellow" },
-//   cancelRequest: { ko: "취소요청", co: "blue" },
-//   cancelCompleted: { ko: "취소완료", co: "green" },
-// };
+interface ResultItemProps extends PayDataListProps {
+  itemHeight: number;
+}
 
-const ResultItem: FunctionComponent<PayDataListProps> = (props) => {
-  const { payID, payStatus, payDate, plateNum, payPrice } = props;
+const ResultItem: FunctionComponent<ResultItemProps> = (props) => {
+  const { itemHeight, payID, payStatus, payDate, plateNum, payPrice } = props;
   const payStatusKo = parsePayStatus[payStatus];
   const toDateType = new Date(payDate);
   const refinedYear = toDateType.getFullYear().toString().substr(2, 2);
@@ -63,7 +60,7 @@ const ResultItem: FunctionComponent<PayDataListProps> = (props) => {
   // dateformat(typeOfDate, "yy. mm. dd");
 
   return (
-    <ResultItemBox>
+    <ResultItemBox itemHeight={itemHeight}>
       <div>
         <StyledPayStatus color={payStatusColor[payStatusKo]}>
           {payStatusKo}
@@ -87,7 +84,8 @@ const ResultItem: FunctionComponent<PayDataListProps> = (props) => {
 export default ResultItem;
 
 //styled-components
-const ResultItemBox = styled.div`
+const ResultItemBox = styled.div<{ itemHeight: number }>`
+  height: ${(props) => props.itemHeight}px;
   display: flex;
   font-size: 1.3rem;
   font-weight: 500;

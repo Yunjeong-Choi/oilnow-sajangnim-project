@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import ResultItem from "./ResultItem";
-import { FunctionComponent, useEffect, useState, useCallback } from "react";
 import fetchData from "../../../api/fetchData";
 import useScroll from "../../../hooks/useScroll";
+import { FunctionComponent, useEffect, useState, useCallback } from "react";
 
 export interface PayDataListProps {
   payID: number;
@@ -23,115 +23,49 @@ interface ResultListProps {
   plateNumKeyword: string | undefined;
 }
 
-const itemViewPortCount = 10;
-const itemPaddingCount = 10;
-const itemInitialTotal = itemViewPortCount + itemPaddingCount;
-const itemHeight = 45;
-const scrollViewPortHeight = 490; // TODO: 반응형으로 높이조절 어떻게 할까
-
 const ResultList: FunctionComponent<ResultListProps> = ({
   startDate,
   endDate,
   payStatusKeyword,
   plateNumKeyword,
 }) => {
-  const { scrollTop, scrollContainerRef } = useScroll();
-  const [page, setPage] = useState<number>(0);
+  const itemHeight = 45;
+  const scrollViewPortHeight = 490;
   const [list, setList] = useState<PayDataListProps[]>([]); //filteredList가 주로 사용된다 하더라도 원본 데이터는 유지되어야 함
-  const [filteredList, setFilteredList] = useState<PayDataListProps[]>([]);
-
-  const totalItemCount = Math.max(list.length, itemInitialTotal);
-  const containerHeight = Math.max(
-    scrollViewPortHeight,
-    itemHeight * totalItemCount
-  );
-  const startIndex = Math.max(
-    Math.floor(scrollTop / itemHeight) - itemPaddingCount,
-    0
-  );
-  const offsetY = startIndex * itemHeight;
-  const visibleNodes = list.slice(
-    startIndex,
-    startIndex +
-      Math.floor(scrollViewPortHeight / itemHeight) +
-      2 * itemPaddingCount
+  const [page, setPage] = useState<number>(0);
+  const { scrollTop, containerHeight, scrollContainerRef } = useScroll(
+    itemHeight,
+    list
   );
 
-  const filterData = () => {
-    const filteredList = list.reduce<PayDataListProps[]>((acc, cur) => {
-      const payStatusKeywordCondition = payStatusKeyword
-        ? cur.payStatus === payStatusKeyword
-        : true;
-      const payNumKeywordCondition =
-        plateNumKeyword && plateNumKeyword.length > 0
-          ? cur.plateNum.includes(plateNumKeyword)
-          : true;
-      const startDateCondition = startDate
-        ? startDate.getTime() - new Date(cur.payDate).getTime() <= 0
-        : true;
-      const endDateCondition = endDate
-        ? endDate.getTime() - new Date(cur.payDate).getTime() >= 0
-        : true;
-
-      if (
-        payStatusKeywordCondition &&
-        payNumKeywordCondition &&
-        startDateCondition &&
-        endDateCondition
-      ) {
-        acc.push(cur);
-      }
-      return acc;
-    }, []);
-
-    setFilteredList(filteredList);
-  };
-
-  const getData = useCallback(async () => {
+  const getMoreData = useCallback(async () => {
     try {
       const payData = await fetchData(page);
-      console.log("getData!", payData);
       setList(list.concat(payData));
-      setFilteredList(list.concat(payData));
+      console.log(payData);
     } catch (e) {
       console.error(e);
     }
   }, [page]);
 
-  //getData를 실행시키는 부분
-  //TODO: 왜 getData가 4번씩 실행이 될까
   useEffect(() => {
-    getData();
-    // 만약 무한스크롤이 fire 되는 순간 payStatusKeyword와 같은 필터 조건을 다시 콜해줘야 함.
-    // filterPlateNumKeyword();
-    // filterData();
-  }, [page]);
+    getMoreData();
+  }, [getMoreData]);
 
   useEffect(() => {
-    const BUFFER_AREA = scrollViewPortHeight / 3;
-    if (scrollTop + scrollViewPortHeight >= containerHeight - BUFFER_AREA) {
-      setPage(page + 1);
+    if (scrollTop + scrollViewPortHeight >= containerHeight - 10) {
+      const nextPage = page + 1;
+      setPage(nextPage);
+      console.log(nextPage, scrollTop, containerHeight);
     }
-  }, [scrollTop]);
-
-  useEffect(() => {
-    filterData();
-  }, [payStatusKeyword, plateNumKeyword, startDate, endDate]);
+  }, [scrollTop, containerHeight]);
 
   return (
     <ResultListBox ref={scrollContainerRef} height={scrollViewPortHeight}>
       <TotalItemBox height={containerHeight}>
-        <VisibleContentsBox offsetY={offsetY}>
-          {/* {payStatusKeyword || plateNumKeyword || startDate || endDate
-            ? filteredList.map((item) => (
-                <ResultItem key={item.payID} {...item} />
-              ))
-            : visibleNodes.map((item) => (
-                <ResultItem key={item.payID} {...item} />
-              ))} */}
-          {visibleNodes.map((item) => (
-            // {filteredList.map((item) => (
-            <ResultItem key={item.payID} {...item} />
+        <VisibleContentsBox>
+          {list.map((item) => (
+            <ResultItem key={item.payID} itemHeight={itemHeight} {...item} />
           ))}
         </VisibleContentsBox>
       </TotalItemBox>
@@ -153,8 +87,7 @@ const TotalItemBox = styled.div<{ height: number }>`
   position: relative;
 `;
 
-const VisibleContentsBox = styled.div<{ offsetY: number }>`
+const VisibleContentsBox = styled.div`
   position: absolute;
   width: 100%;
-  transform: translateY(${(props) => props.offsetY}px);
 `;
