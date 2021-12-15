@@ -1,10 +1,8 @@
 import axios from "axios";
 
-const fetchData = async (page: number, pageSize = 30) => {
+const fetchData = async () => {
   try {
-    const response = await axios.get(
-      `http://localhost:3303/payData?page=${page}&pageSize=${pageSize}`
-    );
+    const response = await axios.get(`http://localhost:3303/payData`);
     const payData = response.data;
     return payData;
   } catch (error) {
@@ -13,13 +11,14 @@ const fetchData = async (page: number, pageSize = 30) => {
   }
 };
 
+//페이지네이션//
 // const fetchData = async (page: number, pageSize = 30) => {
 //   try {
 //     const response = await axios.get(
-//       `http://localhost:3303/data?page=${page}&pageSize=${pageSize}`
+//       `http://localhost:3303/payData?page=${page}&pageSize=${pageSize}`
 //     );
-//     const resultList = response.data;
-//     return resultList;
+//     const payData = response.data;
+//     return payData;
 //   } catch (error) {
 //     console.log("error!", error);
 //     return error;

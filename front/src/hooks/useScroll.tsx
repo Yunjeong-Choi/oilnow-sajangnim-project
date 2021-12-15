@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { PayDataListProps } from "../components/payment/PayResult/ResultList";
+import { PayDataListProps } from "../components/payment/PayResult/ResultList(virtualList)";
 import useThrottle from "./useThrottle";
 
 const useScroll = (

@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import styled from "styled-components";
 import ResultHeader from "./ResultHeader";
-import ResultList from "./ResultList";
+import ResultList from "./ResultList(virtualList)";
 
 interface PayResultProps {
   startDate?: Date;

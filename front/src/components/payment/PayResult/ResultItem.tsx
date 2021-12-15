@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import styled from "styled-components";
 import bracketRight from "../../../assets/images/bracketRight-icon.png";
 import { Link } from "react-router-dom";
-import { PayDataListProps } from "./ResultList";
+import { PayDataListProps } from "./ResultList(virtualList)";
 
 // type PayStatusKey =
 //   | "waitForPaid"
