@@ -37,8 +37,12 @@ const ResultList: FunctionComponent<ResultListProps> = ({
 }) => {
   const [page, setPage] = useState<number>(0);
   const [list, setList] = useState<PayDataListProps[]>([]); //filteredList가 주로 사용된다 하더라도 원본 데이터는 유지되어야 함
-  const { scrollTop, scrollContainerRef } = useScroll(itemHeight, list);
   const [filteredList, setFilteredList] = useState<PayDataListProps[]>([]);
+  const { scrollTop, scrollContainerRef } = useScroll(
+    itemHeight,
+    list,
+    filteredList
+  );
 
   const totalItemCount = Math.max(list.length, itemInitialTotal);
   const containerHeight = Math.max(

@@ -32,21 +32,68 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   const itemHeight = 45;
   const scrollViewPortHeight = 490;
   const [list, setList] = useState<PayDataListProps[]>([]); //filteredList가 주로 사용된다 하더라도 원본 데이터는 유지되어야 함
+  const [filteredList, setFilteredList] = useState<PayDataListProps[]>([]);
   const [page, setPage] = useState<number>(0);
   const { scrollTop, containerHeight, scrollContainerRef } = useScroll(
     itemHeight,
-    list
+    list,
+    filteredList
   );
 
   const getMoreData = useCallback(async () => {
     try {
       const payData = await fetchData(page);
-      setList(list.concat(payData));
+      setList(list.concat(payData)); //여기에 setFilteredList를 동일하게 해버리면 페이지가 올라갈때마다 필터가 풀림
       console.log(payData);
     } catch (e) {
       console.error(e);
     }
   }, [page]);
+
+  const filterData = () => {
+    // console.log(payStatusKeyword, plateNumKeyword, startDate, endDate);
+
+    //아무 필터도 없는 맨 처음은 list가 나와야 함
+    if (
+      payStatusKeyword &&
+      plateNumKeyword &&
+      startDate &&
+      endDate === undefined
+    ) {
+      setFilteredList(list);
+    } else {
+      //TODO: 필터에 해당하는 결과값이 없는 경우는 <결과없음>이 떠야함
+      const filteredList = list.reduce<PayDataListProps[]>((acc, cur) => {
+        const payStatusKeywordCondition = payStatusKeyword
+          ? cur.payStatus === payStatusKeyword
+          : true;
+        const payNumKeywordCondition =
+          plateNumKeyword && plateNumKeyword.length > 0
+            ? cur.plateNum.includes(plateNumKeyword)
+            : true;
+        const startDateCondition = startDate
+          ? startDate.getTime() - new Date(cur.payDate).getTime() <= 0
+          : true;
+        const endDateCondition = endDate
+          ? endDate.getTime() - new Date(cur.payDate).getTime() >= 0
+          : true;
+
+        if (
+          payStatusKeywordCondition &&
+          payNumKeywordCondition &&
+          startDateCondition &&
+          endDateCondition
+        ) {
+          acc.push(cur);
+        }
+
+        return acc;
+      }, []);
+
+      // console.log(filteredList);
+      setFilteredList(filteredList);
+    }
+  };
 
   useEffect(() => {
     getMoreData();
@@ -60,11 +107,15 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     }
   }, [scrollTop, containerHeight]);
 
+  useEffect(() => {
+    filterData();
+  }, [list, payStatusKeyword, plateNumKeyword, startDate, endDate]);
+
   return (
     <ResultListBox ref={scrollContainerRef} height={scrollViewPortHeight}>
       <TotalItemBox height={containerHeight}>
         <VisibleContentsBox>
-          {list.map((item) => (
+          {filteredList.map((item) => (
             <ResultItem key={item.payID} itemHeight={itemHeight} {...item} />
           ))}
         </VisibleContentsBox>
