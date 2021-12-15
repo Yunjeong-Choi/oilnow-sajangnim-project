@@ -1,7 +1,5 @@
-import { UIEvent, useRef } from "react";
-// UIEvent<HTMLElement>
+import { useRef } from "react";
 
-//TODO: 타입 체크 필요
 const useThrottle = (fn: (arg?: any) => void, delay = 225) => {
   const timer = useRef<NodeJS.Timeout | null>(null);
 

@@ -53,7 +53,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
   }, [getMoreData]);
 
   useEffect(() => {
-    if (scrollTop + scrollViewPortHeight >= containerHeight - 10) {
+    if (scrollTop + scrollViewPortHeight >= containerHeight - 100) {
       const nextPage = page + 1;
       setPage(nextPage);
       console.log(nextPage, scrollTop, containerHeight);
