@@ -12,11 +12,15 @@ const PayDetail = () => {
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
   const [isImageCarouselOpen, setIsImageCarouselOpen] =
     useState<boolean>(false);
+  const [clickedSlide, setClickedSlide] = useState<number>(0);
 
   return (
     <>
       {isImageCarouselOpen ? (
-        <CancelImageCarousel setIsImageCarouselOpen={setIsImageCarouselOpen} />
+        <CancelImageCarousel
+          setIsImageCarouselOpen={setIsImageCarouselOpen}
+          clickedSlide={clickedSlide}
+        />
       ) : null}
       {isCancelModalOpen ? (
         <PayCancelModal setIsCancelModalOpen={setIsCancelModalOpen} />
@@ -33,6 +37,7 @@ const PayDetail = () => {
         <PayDetailInfo />
         <CustomerCancelRequest
           setIsImageCarouselOpen={setIsImageCarouselOpen}
+          setClickedSlide={setClickedSlide}
         />
         <ProcessOptions>
           <Link to="/">

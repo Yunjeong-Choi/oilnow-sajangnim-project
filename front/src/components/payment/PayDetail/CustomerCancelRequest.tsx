@@ -5,18 +5,21 @@ import noImage from "../../../assets/images/noImage-icon.jpg";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import useLazyImage from "../../../hooks/useLazyImage";
 
+interface CustomerCancelRequestProps {
+  setIsImageCarouselOpen: (param: boolean) => void;
+  setClickedSlide: (param: number) => void;
+}
+
 interface LazyImageProps {
+  index: number;
   observer: IntersectionObserver | null;
   src: string;
   alt: string;
 }
 
-interface CustomerCancelRequestProps {
-  setIsImageCarouselOpen: (param: boolean) => void;
-}
-
 const CustomerCancelRequest = ({
   setIsImageCarouselOpen,
+  setClickedSlide,
 }: CustomerCancelRequestProps) => {
   const location = useLocation();
   const { cancelClaim, cancelImgURL } = location.state;
@@ -24,12 +27,19 @@ const CustomerCancelRequest = ({
     useState<IntersectionObserver | null>(null);
 
   const LazyImage: FunctionComponent<LazyImageProps> = ({
+    index,
     observer,
     src,
     alt = "no image",
   }) => {
     const imageEl = useRef(null);
     if (!observer) return null;
+
+    const handleRequestImgClick = () => {
+      setIsImageCarouselOpen(true);
+      setClickedSlide(index);
+      console.log(index);
+    };
 
     useEffect(() => {
       const { current } = imageEl;
@@ -45,7 +55,7 @@ const CustomerCancelRequest = ({
     }, [observer]);
 
     return (
-      <RequestImgBox onClick={() => setIsImageCarouselOpen(true)}>
+      <RequestImgBox onClick={handleRequestImgClick}>
         <img ref={imageEl} data-src={src} src={noImage} alt={alt}></img>
       </RequestImgBox>
     );
@@ -75,10 +85,10 @@ const CustomerCancelRequest = ({
           </RequestImgBox>
         ) : (
           <RequestImgList className="RequestImgList">
-            {/* TODO: 이미지 클릭하면 크게 볼 수 있는 라이브러리? 필요 */}
             {cancelImgURL.map((image: string, index: number) => (
               <LazyImage
                 key={index}
+                index={index}
                 observer={imageObserver}
                 src={image}
                 alt="cancel img url"
