@@ -29,13 +29,3 @@ const useLazyImage = (
 };
 
 export default useLazyImage;
-
-/**
- * 1. intersectionObserver로 div 감시
- * 2. 스크롤을 통해 감시영역 안으로 들어옴
- * 3. 감지되면 src를 요청
- * 4. lazyLoading...
- * */
-// lazy ? (
-//   <div style={{ width: 100, height: 100, color: "gray" }} />
-// ) :

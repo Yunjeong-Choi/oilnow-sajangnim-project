@@ -92,7 +92,6 @@ const ResultList: FunctionComponent<ResultListProps> = ({
         return acc;
       }, []);
 
-      // console.log(filteredList);
       setFilteredList(filteredList);
     }
   };

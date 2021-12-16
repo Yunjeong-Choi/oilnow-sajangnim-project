@@ -1,8 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Payment from "./containers/Payment";
 import PayDetail from "./components/payment/PayDetail";
-// import Payment from "@containers/Payment";
-// import PayDetail from "@components/payment/PayDetail";
 
 function App() {
   return (

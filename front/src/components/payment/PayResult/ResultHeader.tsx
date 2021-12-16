@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import arrowDown from "../../../assets/images/arrowDown-icon.png";
 
 const colTitleList = ["결제상태", "날짜", "차량번호", "금액"];
 
@@ -9,13 +8,7 @@ const ResultHeader = () => {
       {colTitleList.map((title) => (
         <div key={title}>{title}</div>
       ))}
-      <div>
-        상세보기
-        {/* <select>
-          <option>최신순</option>
-          <option>오래된순</option>
-        </select> */}
-      </div>
+      <div>상세보기</div>
     </ResultHeaderBox>
   );
 };
@@ -66,11 +59,6 @@ const ResultHeaderBox = styled.div`
     padding-top: 0.125em;
     background-image: url("../../../assets/images/arrowDown-icon.png") no-repeat
       95% 50%;
-    /* TODO: 하... 왜 배경에 안먹니... */
-    /* background-color: transparent; */
-    /* background-repeat: no-repeat; */
-    /* background-size: 90%; */
-    /* background-position: 97% 50%/15px auto; */
     text-align: center;
     font-weight: 500;
     font-size: 1.2rem;

@@ -51,7 +51,7 @@ const ResultList: FunctionComponent<FilterValueProps> = ({
   const getMoreData = useCallback(async () => {
     try {
       const payData = await fetchData();
-      setList(payData); //여기에 setFilteredList를 동일하게 해버리면 페이지가 올라갈때마다 필터가 풀림
+      setList(payData); //여기에 setFilteredList(payData)를 해버리면 페이지가 올라갈때마다 필터가 풀림
       setTotalContainerHeight(payData.length * itemHeight);
     } catch (e) {
       console.error(e);
@@ -69,7 +69,6 @@ const ResultList: FunctionComponent<FilterValueProps> = ({
     ) {
       setFilteredList(list);
     } else {
-      //TODO: 필터에 해당하는 결과값이 없는 경우는 <결과없음>이 떠야함
       const filteredList = list.reduce<PayDataListProps[]>((acc, cur) => {
         const payStatusKeywordCondition = payStatusKeyword
           ? cur.payStatus === payStatusKeyword
@@ -119,9 +118,16 @@ const ResultList: FunctionComponent<FilterValueProps> = ({
     <ResultListBox ref={scrollContainerRef} height={scrollViewPortHeight}>
       <TotalItemBox height={totalContainerHeight}>
         <VisibleContentsBox offsetY={offsetY}>
-          {slicedFilteredList.map((item) => (
-            <ResultItem key={item.payID} itemHeight={itemHeight} {...item} />
-          ))}
+          {slicedFilteredList.length === 0 ? (
+            <NoResult>
+              <div>결과가 없어요</div>
+              <div>검색조건을 확인해주세요</div>
+            </NoResult>
+          ) : (
+            slicedFilteredList.map((item) => (
+              <ResultItem key={item.payID} itemHeight={itemHeight} {...item} />
+            ))
+          )}
         </VisibleContentsBox>
       </TotalItemBox>
     </ResultListBox>
@@ -148,4 +154,15 @@ const VisibleContentsBox = styled.div<{ offsetY: number }>`
   transform: translateY(
     ${(props) => props.offsetY}px
   ); //px 단위를 안넣어주면 인식이 잘 안됨
+`;
+
+const NoResult = styled.div`
+  text-align: center;
+  padding: 8rem 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+
+  > div {
+    padding: 0.8rem;
+  }
 `;

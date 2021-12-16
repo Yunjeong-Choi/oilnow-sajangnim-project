@@ -54,15 +54,14 @@ select {
 select::-ms-expand {
   display: none; /*for IE10,11*/
 }
-/* select에 화살표 이미지 백그라운드로 넣어야 함 */
+/* TODOs: select에 화살표 이미지 백그라운드로 넣어야 함 */
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-} */
+}
 
-/* adjust react date-picker css */
-
+/* custom react date-picker css */
 .react-datepicker {
   font-size: 1.4em;
   border-radius: 0.4rem;

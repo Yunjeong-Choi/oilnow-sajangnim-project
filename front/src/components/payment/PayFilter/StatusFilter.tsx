@@ -2,7 +2,6 @@ import { FunctionComponent, MouseEvent, useState } from "react";
 import styled from "styled-components";
 import { parsePayStatus } from "../PayResult/ResultItem";
 
-// const statusList = ["결제대기", "결제완료", "취소요청", "취소완료"];
 const statusList = Object.entries(parsePayStatus);
 
 interface StatusFilterProps {
@@ -14,8 +13,6 @@ const StatusFilter: FunctionComponent<StatusFilterProps> = ({
   payStatusKeyword,
   setPayStatusKeyword,
 }) => {
-  // const [clickedValue, setClickedValue] = useState<string>();
-
   const handlePayStatusClick = (event: MouseEvent<HTMLButtonElement>) => {
     const curPayStatus = event.currentTarget.value;
     if (payStatusKeyword === curPayStatus) {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import bracketLeft from "../../../assets/images/bracketLeft-icon.png";
 import { MainLayout } from "../../../containers/common/ContainerLayout";
@@ -13,6 +13,7 @@ const PayDetail = () => {
   const [isImageCarouselOpen, setIsImageCarouselOpen] =
     useState<boolean>(false);
   const [clickedSlide, setClickedSlide] = useState<number>(0);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -26,6 +27,7 @@ const PayDetail = () => {
         <PayCancelModal setIsCancelModalOpen={setIsCancelModalOpen} />
       ) : null}
       <HeaderLayout>
+        {/* TODO: 돌아갔을때 결과리스트의 스크롤을 어떻게 유지할것인가 */}
         <Link to="/">
           <button>
             <img src={bracketLeft} alt="bracket Left"></img>
@@ -40,9 +42,8 @@ const PayDetail = () => {
           setClickedSlide={setClickedSlide}
         />
         <ProcessOptions>
-          <Link to="/">
-            <BackwardBtn>돌아가기</BackwardBtn>
-          </Link>
+          {/* TODO: 돌아갔을때 결과리스트의 스크롤을 어떻게 유지할것인가 */}
+          <BackwardBtn onClick={() => navigate("/")}>돌아가기</BackwardBtn>
           <PayCancelBtn onClick={() => setIsCancelModalOpen(true)}>
             결제취소
           </PayCancelBtn>
@@ -83,13 +84,11 @@ const ProcessOptions = styled.div`
   flex-grow: 8;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
-  padding: 3rem;
+  padding: 3rem 2rem;
   background-color: white;
 
   button {
     height: 3.5rem;
-    width: 15rem;
     color: white;
     border: none;
     border-radius: 0.4rem;
@@ -97,6 +96,7 @@ const ProcessOptions = styled.div`
     font-size: 1.8rem;
     line-height: 2.6rem;
     padding-top: 0.1em;
+    flex-grow: 1;
   }
 `;
 
@@ -109,4 +109,3 @@ const BackwardBtn = styled.button`
 const PayCancelBtn = styled.button`
   background-color: var(--red);
 `;
-//TODOs: 왜 화면폭이 줄어들면 paycancel 의 width만 줄어들지

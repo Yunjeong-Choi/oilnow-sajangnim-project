@@ -50,7 +50,7 @@ const CustomerCancelRequest = ({
       }
 
       return () => {
-        observer.unobserve(current); //TODO: ㅇㅣ게 왜 함수으로 리턴되어야 하는지?
+        observer.unobserve(current);
       };
     }, [observer]);
 

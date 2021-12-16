@@ -48,7 +48,6 @@ const DateFilter: FunctionComponent<DateFilterProps> = ({
         />
       </div>
       {/* TODO: startDate가 기존에 선택된 endDate보다 뒤의 날짜가 된다면 endDate는 리셋되도록 */}
-      {/* TODO: onClickOutside로 캘린더를 닫을 수 있음 */}
       {/* TODO: 달력이미지는 custom input으로 해결하면 될듯 */}
       {/* TODO: 헤더의 날짜 형식을 바꾸려면 custom header를 넣어줘야 함 */}
       <button

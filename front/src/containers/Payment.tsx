@@ -11,7 +11,6 @@ const Payment = () => {
 
   return (
     <ContainerLayout titleName="결제관리">
-      {/* TODO: 넘겨야 하는 값이 이렇게 많아지면 context나 redux를 쓰게 되는건가 */}
       <PayFilter
         startDate={startDate}
         setStartDate={setStartDate}

@@ -4,25 +4,12 @@ import bracketRight from "../../../assets/images/bracketRight-icon.png";
 import { Link } from "react-router-dom";
 import { PayDataListProps } from "./model";
 
-// type PayStatusKey =
-//   | "waitForPaid"
-//   | "paid"
-//   | "cancelRequest"
-//   | "cancelCompleted";
-// type PayStatusKoValue = "결제대기" | "결제완료" | "취소요청" | "취소완료";
-// interface ParsePayStatusType {
-//   [key in PayStatusKey]: PayStatusKoValue;
-// }
-//TODO: 이건 왜 안될까요...
-//in은 내부에 있는 모든 타입을 가져온다. (자바스크립트의 문법)
-//record를 쓰는게 더 가독성이 있음
+interface ResultItemProps extends PayDataListProps {
+  itemHeight: number;
+}
 
 interface ParsePayStatusType {
   [key: string]: string;
-}
-
-interface ResultItemProps extends PayDataListProps {
-  itemHeight: number;
 }
 
 export const parsePayStatus: ParsePayStatusType = {
@@ -53,11 +40,6 @@ const ResultItem: FunctionComponent<ResultItemProps> = (props) => {
       ? toDateType.getDate()
       : `0${toDateType.getDate()}`;
   const dateInForm = `${refinedYear}. ${refinedMonth}. ${refinedDate}`;
-  // console.log(payDate, Number(new Date(payDate)));
-  // dns-date
-  // const dateformat = require("dateformat"); //TODO: 이거.. 써도 되는건가...? ㄴ
-  // -> date-fns
-  // dateformat(typeOfDate, "yy. mm. dd");
 
   return (
     <ResultItemBox itemHeight={itemHeight}>
@@ -71,8 +53,6 @@ const ResultItem: FunctionComponent<ResultItemProps> = (props) => {
       <div>{payPrice}</div>
       <div>
         <Link to={`/pay/${payID}`} state={props}>
-          {/* <Link to={{ pathname: `/pay/${payID}`, state: { ...itemValue } }}> */}
-          {/* 쿼리스트링, 쿼리파람 등을 사용할 수 있으나 비추, 길이에 제한이 있고,  */}
           <span>상세</span>
           <img src={bracketRight} alt="bracket Right"></img>
         </Link>

@@ -8,19 +8,9 @@ interface PayCancelModalProps {
 const PayCancelModal: FunctionComponent<PayCancelModalProps> = ({
   setIsCancelModalOpen,
 }) => {
-  // const handleModalBGClick = (event: MouseEvent<HTMLDivElement>) => {
-  //   const isModalContent = event.currentTarget.closest(".modalContent");
-  //   console.log(isModalContent, event.currentTarget);
-  //   if (!isModalContent) {
-  //     setIsCancelModalOpen(false);
-  //   }
-  // };
-  //TODOs: 왜 안먹힐까잉... 분명 null인디...
-
   return (
-    // <PayCancelModalBG onClick={handleModalBGClick}>
-    // <ModalContentBox className="modalContent">
     <PayCancelModalBG>
+      {/* TODO: 빈 공간을 누르면 모달이 닫히도록 */}
       <ModalContentBox>
         <ContentText>
           <span>정말 결제를 취소하시겠습니까?</span>
