@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import arrowDown from "../../../assets/images/arrowDown-icon.png";
+// import arrowDown from "../../../assets/images/arrowDown-icon.png";
 
 const colTitleList = ["결제상태", "날짜", "차량번호", "금액"];
 

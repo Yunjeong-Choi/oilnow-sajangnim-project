@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import styled from "styled-components";
 import bracketRight from "../../../assets/images/bracketRight-icon.png";
 import { Link } from "react-router-dom";
-import { PayDataListProps } from "./ResultList(virtualList)";
+import { PayDataListProps } from "./model";
 
 // type PayStatusKey =
 //   | "waitForPaid"
@@ -21,6 +21,10 @@ interface ParsePayStatusType {
   [key: string]: string;
 }
 
+interface ResultItemProps extends PayDataListProps {
+  itemHeight: number;
+}
+
 export const parsePayStatus: ParsePayStatusType = {
   waitForPaid: "결제대기",
   paid: "결제완료",
@@ -34,10 +38,6 @@ const payStatusColor: ParsePayStatusType = {
   취소요청: "rgba(244, 44, 16, 0.51)",
   취소완료: "#C4C4C4",
 };
-
-interface ResultItemProps extends PayDataListProps {
-  itemHeight: number;
-}
 
 const ResultItem: FunctionComponent<ResultItemProps> = (props) => {
   const { itemHeight, payID, payStatus, payDate, plateNum, payPrice } = props;

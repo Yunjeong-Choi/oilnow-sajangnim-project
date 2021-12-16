@@ -1,16 +1,10 @@
 import { FunctionComponent } from "react";
 import styled from "styled-components";
 import ResultHeader from "./ResultHeader";
-import ResultList from "./ResultList(virtualList)";
+import ResultList from "./ResultList(사용중, VirtualList)";
+import { FilterValueProps } from "./model";
 
-interface PayResultProps {
-  startDate?: Date;
-  endDate?: Date;
-  payStatusKeyword: string | undefined;
-  plateNumKeyword: string | undefined;
-}
-
-const PayResult: FunctionComponent<PayResultProps> = ({
+const PayResult: FunctionComponent<FilterValueProps> = ({
   startDate,
   endDate,
   payStatusKeyword,

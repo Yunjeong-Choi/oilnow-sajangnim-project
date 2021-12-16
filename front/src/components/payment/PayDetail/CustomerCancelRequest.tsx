@@ -113,7 +113,7 @@ const RequestImgList = styled.div`
 
   ::-webkit-scrollbar {
     height: 1.3rem;
-    /* border-radius: 0.4rem; */
+    border-radius: 0.4rem;
     border: 0.07rem solid var(--borderGray);
   }
 

@@ -1,3 +1,5 @@
+//VirtualList
+
 //무한스크롤(페이지네이션)를 제외하고 가상리스트만 적용한 이유
 //필터가 모든 데이터에 적용된 결과에 버추얼리스트를 적용하려면 서버에서 적용해주거나
 //처음부터 모든 데이터를 가져와야 함
@@ -8,27 +10,9 @@ import ResultItem from "./ResultItem";
 import fetchData from "../../../api/fetchData";
 import useScroll from "../../../hooks/useScroll";
 import { FunctionComponent, useEffect, useState, useCallback } from "react";
+import { FilterValueProps, PayDataListProps } from "./model";
 
-export interface PayDataListProps {
-  payID: number;
-  payStatus: string;
-  payDate: string;
-  plateNum: string;
-  payPrice: number;
-  orderDetail: string;
-  cancelReason: string;
-  cancelImgURL: [];
-  cancelClaim: string;
-}
-
-interface ResultListProps {
-  startDate?: Date;
-  endDate?: Date;
-  payStatusKeyword: string | undefined;
-  plateNumKeyword: string | undefined;
-}
-
-const ResultList: FunctionComponent<ResultListProps> = ({
+const ResultList: FunctionComponent<FilterValueProps> = ({
   startDate,
   endDate,
   payStatusKeyword,
@@ -74,6 +58,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     }
   }, []);
 
+  //전체 데이터에 필터 걸기
   const filterData = () => {
     //아무 필터도 없는 맨 처음은 list가 나와야 함
     if (
@@ -124,6 +109,7 @@ const ResultList: FunctionComponent<ResultListProps> = ({
     filterData();
   }, [list, payStatusKeyword, plateNumKeyword, startDate, endDate]);
 
+  //visible nodes 자르기
   //TODO: 중간에 왜 두번 되는지 모르겠네...
   useEffect(() => {
     setSlicedFilteredList(filteredList.slice(startIndex, endIndex));

@@ -1,3 +1,4 @@
+//Pagination(InfiniteScroll)
 import styled from "styled-components";
 import ResultItem from "./ResultItem";
 import fetchData from "../../../api/fetchData";
