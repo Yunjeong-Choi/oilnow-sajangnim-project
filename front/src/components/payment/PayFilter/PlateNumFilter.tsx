@@ -1,9 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FunctionComponent,
-  SetStateAction,
-} from "react";
+import { ChangeEvent, FunctionComponent } from "react";
 import styled from "styled-components";
 import magnifyGlass from "../../../assets/images/magnifyGlass-icon.png";
 import useDebounce from "../../../hooks/useDebounce";

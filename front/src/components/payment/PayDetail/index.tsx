@@ -6,13 +6,18 @@ import { MainLayout } from "../../../containers/common/ContainerLayout";
 import CustomerCancelRequest from "./CustomerCancelRequest";
 import PayDetailInfo from "./PayDetailInfo";
 import PayCancelModal from "./PayCancelModal";
+import CancelImageCarousel from "./CancelImageCarousel";
 
 const PayDetail = () => {
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
+  const [isImageCarouselOpen, setIsImageCarouselOpen] =
+    useState<boolean>(false);
 
   return (
     <>
-      {/* <PayCancelModal setIsCancelModalOpen={setIsCancelModalOpen} /> */}
+      {isImageCarouselOpen ? (
+        <CancelImageCarousel setIsImageCarouselOpen={setIsImageCarouselOpen} />
+      ) : null}
       {isCancelModalOpen ? (
         <PayCancelModal setIsCancelModalOpen={setIsCancelModalOpen} />
       ) : null}
@@ -26,7 +31,9 @@ const PayDetail = () => {
       </HeaderLayout>
       <MainLayout>
         <PayDetailInfo />
-        <CustomerCancelRequest />
+        <CustomerCancelRequest
+          setIsImageCarouselOpen={setIsImageCarouselOpen}
+        />
         <ProcessOptions>
           <Link to="/">
             <BackwardBtn>돌아가기</BackwardBtn>

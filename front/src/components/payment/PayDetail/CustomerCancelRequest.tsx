@@ -11,12 +11,17 @@ interface LazyImageProps {
   alt: string;
 }
 
-const CustomerCancelRequest = () => {
+interface CustomerCancelRequestProps {
+  setIsImageCarouselOpen: (param: boolean) => void;
+}
+
+const CustomerCancelRequest = ({
+  setIsImageCarouselOpen,
+}: CustomerCancelRequestProps) => {
   const location = useLocation();
   const { cancelClaim, cancelImgURL } = location.state;
   const [imageObserver, setImageObserver] =
     useState<IntersectionObserver | null>(null);
-  const [translateX, setTranslateX] = useState<number>(0);
 
   const LazyImage: FunctionComponent<LazyImageProps> = ({
     observer,
@@ -40,7 +45,7 @@ const CustomerCancelRequest = () => {
     }, [observer]);
 
     return (
-      <RequestImgBox translateX={translateX}>
+      <RequestImgBox onClick={() => setIsImageCarouselOpen(true)}>
         <img ref={imageEl} data-src={src} src={noImage} alt={alt}></img>
       </RequestImgBox>
     );
@@ -65,7 +70,7 @@ const CustomerCancelRequest = () => {
           <RequestText>{cancelClaim}</RequestText>
         )}
         {cancelImgURL.length === 0 ? (
-          <RequestImgBox translateX={0}>
+          <RequestImgBox>
             <span>이미지 없음</span>
           </RequestImgBox>
         ) : (
@@ -123,7 +128,7 @@ const RequestImgList = styled.div`
   }
 `;
 
-const RequestImgBox = styled.div<{ translateX: number }>`
+const RequestImgBox = styled.div`
   width: 8rem;
   height: 8rem;
   display: flex;

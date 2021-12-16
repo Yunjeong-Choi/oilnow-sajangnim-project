@@ -1,8 +1,8 @@
-import { Dispatch, FunctionComponent, MouseEvent, SetStateAction } from "react";
+import { FunctionComponent } from "react";
 import styled from "styled-components";
 
 interface PayCancelModalProps {
-  setIsCancelModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsCancelModalOpen: (param: boolean) => void;
 }
 
 const PayCancelModal: FunctionComponent<PayCancelModalProps> = ({
