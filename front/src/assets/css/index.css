@@ -45,17 +45,6 @@ a {
   color: var(--gray);
 }
 
-select {
-  -webkit-appearance: none; /* for chrome */
-  -moz-appearance: none; /*for firefox*/
-  appearance: none;
-}
-
-select::-ms-expand {
-  display: none; /*for IE10,11*/
-}
-/* TODOs: select에 화살표 이미지 백그라운드로 넣어야 함 */
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

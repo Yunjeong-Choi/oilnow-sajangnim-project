@@ -50,20 +50,4 @@ const ResultHeaderBox = styled.div`
       padding: 0 0.5rem;
     }
   }
-
-  select {
-    width: 100%;
-    max-width: 10rem;
-    height: 2rem;
-    margin-top: 0.1rem;
-    padding-top: 0.125em;
-    background-image: url("../../../assets/images/arrowDown-icon.png") no-repeat
-      95% 50%;
-    text-align: center;
-    font-weight: 500;
-    font-size: 1.2rem;
-    line-height: 1.7rem;
-    border: 0.07rem solid var(--borderGray);
-    border-radius: 0.4rem;
-  }
 `;

@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import styled from "styled-components";
+import ArrowDown from "../../../assets/images/arrowDown-icon.png";
 
 interface PayCancelModalProps {
   setIsCancelModalOpen: (param: boolean) => void;
@@ -20,13 +21,16 @@ const PayCancelModal: FunctionComponent<PayCancelModalProps> = ({
             취소사유를 선택해주세요.
             <span>(필수사항)</span>
           </div>
+        </ContentText>
+        <CancelReason>
           <select>
             <option>취소사유를 선택해주세요.</option>
             <option>다른 결제 수단으로 다시 결제</option>
             <option>시스템 오류</option>
             <option>기타 사유</option>
           </select>
-        </ContentText>
+          <img src={ArrowDown} alt="Arrow Down" />
+        </CancelReason>
         <ProcessOptions>
           <button onClick={() => setIsCancelModalOpen(false)}>돌아가기</button>
           <button>취소확정</button>
@@ -62,33 +66,52 @@ const ModalContentBox = styled.div`
 `;
 
 const ContentText = styled.div`
-  height: 55%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   > span {
     font-weight: bold;
     font-size: 2.4rem;
     line-height: 3.5rem;
+    margin-bottom: 1rem;
   }
 
-  div {
+  > div {
     font-size: 1.3rem;
     line-height: 1.9rem;
 
-    span {
+    > span {
       font-size: 1rem;
       line-height: 1.4rem;
       color: var(--red);
     }
   }
+`;
+
+const CancelReason = styled.div`
+  width: 70%;
+  height: 3rem;
+  border: 0.07rem solid var(--borderGray);
+  border-radius: 0.4rem;
+  position: relative;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+
+  img {
+    margin-right: 1rem;
+  }
 
   select {
-    width: 70%;
-    height: 3rem;
-    padding: 0 1em;
-    border-radius: 0.4rem;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding-left: 1.5rem;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
   }
 `;
 
