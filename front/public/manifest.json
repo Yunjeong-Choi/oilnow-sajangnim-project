@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "오일나우 사장님 센터",
+  "name": "사장님의 오일나우 관리를 위한 페이지",
   "icons": [
     {
       "src": "favicon.ico",

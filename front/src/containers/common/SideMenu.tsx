@@ -167,6 +167,7 @@ const MenuTitleClose = styled(MenuCategory)`
   font-size: 3rem;
   line-height: 4rem;
   border: none;
+  cursor: pointer;
 `;
 
 const OilnowKakao = styled.div`

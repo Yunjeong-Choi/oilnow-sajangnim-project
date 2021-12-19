@@ -91,6 +91,7 @@ const CancelImageCarouselBG = styled.div`
 
 const ImageCarouselBox = styled.div`
   width: 100%;
+  max-width: 65rem;
   display: flex;
 
   > div {

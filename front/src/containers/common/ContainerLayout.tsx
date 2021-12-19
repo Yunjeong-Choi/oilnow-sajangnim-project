@@ -65,6 +65,7 @@ export const HeaderBtn = styled.button`
   background-color: var(--lightGray);
   border-radius: 1.8rem;
   border: none;
+  cursor: pointer;
 `;
 
 const EstimateBtn = styled(HeaderBtn)`

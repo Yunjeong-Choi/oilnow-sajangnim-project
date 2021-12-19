@@ -73,6 +73,7 @@ const StyledDatePicker = styled(DatePicker)`
   background: #ffffff;
   border: 0.07rem solid var(--borderGray);
   border-radius: 0.4rem;
+  cursor: pointer;
 `;
 
 const DateFilterBox = styled.div`
