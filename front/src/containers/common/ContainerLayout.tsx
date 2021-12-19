@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { FunctionComponent } from "react";
+import {
+  FunctionComponent,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import SideMenu from "./SideMenu";
 
 interface ContainerLayoutProps {
   titleName: string;
@@ -9,16 +16,20 @@ const ContainerLayout: FunctionComponent<ContainerLayoutProps> = ({
   titleName,
   children,
 }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
   return (
     <>
+      {/* {isMenuOpen ? <SideMenu setIsMenuOpen={setIsMenuOpen} /> : null} */}
       <HeaderLayout>
         <div>
-          <button>메뉴</button>
-          <span>{titleName}</span>
+          <SideMenu />
+          {/* <HeaderBtn onClick={() => setIsMenuOpen(!isMenuOpen)}>메뉴</HeaderBtn> */}
+          <HeaderTitle>{titleName}</HeaderTitle>
         </div>
         <div>
-          <button>알림</button>
-          <button>견적서</button>
+          <HeaderBtn>알림</HeaderBtn>
+          <EstimateBtn>견적서</EstimateBtn>
         </div>
       </HeaderLayout>
       <MainLayout>{children}</MainLayout>
@@ -34,33 +45,33 @@ const HeaderLayout = styled.header`
   justify-content: space-between;
   padding: 1.8rem 1.2rem;
 
-  div {
+  > div {
     display: flex;
   }
+`;
 
-  span {
-    font-weight: bold;
-    font-size: 2.8rem;
-    line-height: 4.1rem;
-    margin-left: 1rem;
-  }
+const HeaderTitle = styled.span`
+  font-weight: bold;
+  font-size: 2.8rem;
+  line-height: 4.1rem;
+  margin-left: 1rem;
+`;
 
-  button {
-    font-weight: bold;
-    font-size: 1.4rem;
-    line-height: 2rem;
-    padding: 0.8rem 1.1rem;
-    background-color: var(--lightGray);
-    border-radius: 1.8rem;
-    border: none;
-  }
+export const HeaderBtn = styled.button`
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  padding: 0.8rem 1.1rem;
+  background-color: var(--lightGray);
+  border-radius: 1.8rem;
+  border: none;
+`;
 
-  button:last-child {
-    margin-left: 1rem;
-    padding: 0.8rem 2rem;
-    color: white;
-    background-color: var(--oilBlue);
-  }
+const EstimateBtn = styled(HeaderBtn)`
+  margin-left: 1rem;
+  padding: 0.8rem 2rem;
+  color: white;
+  background-color: var(--oilBlue);
 `;
 
 export const MainLayout = styled.main`
