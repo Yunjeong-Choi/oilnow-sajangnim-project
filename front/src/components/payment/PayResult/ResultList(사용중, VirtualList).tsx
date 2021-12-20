@@ -1,10 +1,5 @@
 //VirtualList
 
-//무한스크롤(페이지네이션)를 제외하고 가상리스트만 적용한 이유
-//필터가 모든 데이터에 적용된 결과에 버추얼리스트를 적용하려면 서버에서 적용해주거나
-//처음부터 모든 데이터를 가져와야 함
-//지금은 처음부터 다 가져와서 프론트에서 가상리스트로 최적화 하기 (무한스크롤 페이지네이션 -> 가상리스트 -> 점진적 최적화)
-
 import styled from "styled-components";
 import ResultItem from "./ResultItem";
 import fetchData from "../../../api/fetchData";
