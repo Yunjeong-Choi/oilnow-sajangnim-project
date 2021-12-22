@@ -17,7 +17,7 @@
    - Image Carousel
 
 ### 3. 구성
-   ![Slide 16_9 - 29](https://user-images.githubusercontent.com/85290084/147054024-dc283919-98ae-4971-9b2a-4c9aa4a9ea98.png)
+![Slide 16_9 - 29](https://user-images.githubusercontent.com/85290084/147069151-35b74fe8-d432-424f-bb73-46af8337715c.png)
 
 ### 4. 개발과정 (+ 기획, 디자인)
    1. [프로젝트의 시작](https://velog.io/@parfaite73/1.-%ED%86%A0%EC%9D%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-%ED%95%B4%EB%B3%B4%EC%9E%90)
