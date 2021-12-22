@@ -19,7 +19,7 @@
 ### 3. 구성
 ![Slide 16_9 - 29](https://user-images.githubusercontent.com/85290084/147069151-35b74fe8-d432-424f-bb73-46af8337715c.png)
 
-### 4. 개발과정 (+ 기획, 디자인)
+### 4. 개발과정
    1. [프로젝트의 시작](https://velog.io/@parfaite73/1.-%ED%86%A0%EC%9D%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-%ED%95%B4%EB%B3%B4%EC%9E%90)
    2. [서비스 유저는 누구인가](https://velog.io/@parfaite73/2.-%ED%83%80%EA%B9%83-%EB%B6%84%EC%84%9D-%EC%A3%BC%EC%9C%A0%EC%86%8C-%EA%B0%84%ED%8E%B8%EA%B2%B0%EC%A0%9C%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B3%A0%EB%AF%BC)
    3. [주유소 간편결제 플로우에 대한 고민...](https://velog.io/@parfaite73/Project1-3-%EC%A3%BC%EC%9C%A0%EC%86%8C-%EA%B0%84%ED%8E%B8%EA%B2%B0%EC%A0%9C-%ED%94%8C%EB%A1%9C%EC%9A%B0%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B3%A0%EB%AF%BC)
