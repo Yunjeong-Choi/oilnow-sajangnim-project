@@ -32,7 +32,7 @@
    10. [Image Carousel 만들기](https://velog.io/@parfaite73/Project1-10-Image-Carousel-%EB%A7%8C%EB%93%A4%EA%B8%B0)
    11. [사이드메뉴 열고 닫기 (w/ 애니메이션)](https://velog.io/@parfaite73/Project1-11-%EC%82%AC%EC%9D%B4%EB%93%9C%EB%A9%94%EB%89%B4-%EC%97%B4%EA%B3%A0-%EB%8B%AB%EA%B8%B0-w-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98)
 
-### 5. 실
+### 5. 실행방법
    - 가장 먼저 web server를 실행시켜 주세요. (server 디렉토리에서 `yarn start`)
    - 그 다음 react app을 실행시킵니다. (front 디렉토리에서 `yarn start`)
    
