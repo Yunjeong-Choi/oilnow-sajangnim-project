@@ -29,7 +29,7 @@ const payStatusColor: ParsePayStatusType = {
 const ResultItem: FunctionComponent<ResultItemProps> = (props) => {
   const { itemHeight, payID, payStatus, payDate, plateNum, payPrice } = props;
   const payStatusKo = parsePayStatus[payStatus];
-  const toDateType = new Date(payDate);
+  const toDateType = new Date(payDate.replace(/-/g, "/"));
   const refinedYear = toDateType.getFullYear().toString().substr(2, 2);
   const refinedMonth =
     (toDateType.getMonth() + 1).toString().length > 1

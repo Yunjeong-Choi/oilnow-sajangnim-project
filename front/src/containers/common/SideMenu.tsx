@@ -1,13 +1,8 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import KakaoTalk from "../../assets/images/kakaoTalk-icon.png";
 import { HeaderBtn } from "./ContainerLayout";
 
-// interface SideMenuProps {
-//   setIsMenuOpen: (param: boolean) => void;
-// }
-
-// const SideMenu = ({ setIsMenuOpen }: SideMenuProps) => {
 const SideMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const sideMenuContainerRef = useRef<HTMLDivElement>(null);
@@ -19,9 +14,6 @@ const SideMenu = () => {
     if (!menuListRef || !menuListRef.current) return;
     if (!sideMenuBGRef || !sideMenuBGRef.current) return;
 
-    // sideMenuContainerRef.current.style.display = isMenuOpen
-    //   ? "inline-block"
-    //   : "none";
     sideMenuContainerRef.current.style.visibility = isMenuOpen
       ? "visible"
       : "hidden";
