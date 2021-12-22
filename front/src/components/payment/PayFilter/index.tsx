@@ -46,8 +46,10 @@ export default PayFilter;
 //styled-components
 const PayFilterBox = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   padding: 1.2rem;
   background-color: white;
 

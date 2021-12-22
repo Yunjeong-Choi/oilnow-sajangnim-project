@@ -108,6 +108,7 @@ const MenuList = styled.div`
   background: white;
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.25);
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   font-weight: 500;
   height: 100%;
@@ -122,6 +123,7 @@ const MenuCategory = styled.div`
   padding: 1rem 0;
   border-top: 0.07rem solid var(--borderGray);
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
 
   > span {
@@ -165,16 +167,21 @@ const MenuTitleClose = styled(MenuCategory)`
 const OilnowKakao = styled.div`
   flex-grow: 1;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
 
   > button {
     border: 0.07rem solid var(--borderGray);
     border-radius: 2rem;
     background: white;
     display: flex;
+    display: -webkit-flex;
     justify-content: center;
+    -webkit-justify-content: center;
     align-items: center;
+    -webkit-align-items: center;
     font-size: 1.7rem;
     line-height: 2.3rem;
     margin: 1rem 0;

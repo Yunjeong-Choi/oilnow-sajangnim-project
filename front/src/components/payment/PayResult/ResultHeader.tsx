@@ -18,7 +18,9 @@ export default ResultHeader;
 //styled-components
 const ResultHeaderBox = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: center;
+  -webkit-align-items: center;
   padding: 0 0.5rem 1rem 0;
   border-bottom: 0.07rem solid var(--borderGray);
 

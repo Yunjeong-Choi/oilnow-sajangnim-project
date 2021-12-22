@@ -38,12 +38,15 @@ const PlateNumFilterBox = styled.div`
   border: 0.07rem solid var(--borderGray);
   border-radius: 0.4rem;
   display: flex;
+  display: -webkit-flex;
   align-items: center;
+  -webkit-align-items: center;
   padding: 0 1rem;
 
   label {
     flex-grow: 1;
     display: flex;
+    display: -webkit-flex;
   }
 
   img {

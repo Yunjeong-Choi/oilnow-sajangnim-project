@@ -42,11 +42,14 @@ export default ContainerLayout;
 // styled-components
 const HeaderLayout = styled.header`
   display: flex;
+  display: -webkit-flex;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   padding: 1.8rem 1.2rem;
 
   > div {
     display: flex;
+    display: -webkit-flex;
   }
 `;
 
@@ -78,6 +81,7 @@ const EstimateBtn = styled(HeaderBtn)`
 export const MainLayout = styled.main`
   flex-grow: 1;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   background: var(--lightGray);
 `;

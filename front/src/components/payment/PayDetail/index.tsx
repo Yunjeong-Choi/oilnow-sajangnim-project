@@ -58,6 +58,7 @@ export default PayDetail;
 //styled-components
 const HeaderLayout = styled.header`
   display: flex;
+  display: -webkit-flex;
   padding: 1.8rem 1.2rem;
 
   span {
@@ -83,7 +84,9 @@ const HeaderLayout = styled.header`
 const ProcessOptions = styled.div`
   flex-grow: 8;
   display: flex;
+  display: -webkit-flex;
   justify-content: center;
+  -webkit-justify-content: center;
   padding: 3rem 2rem;
   background-color: white;
 

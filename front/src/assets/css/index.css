@@ -19,6 +19,7 @@ body,
 
 #root {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
 }
 

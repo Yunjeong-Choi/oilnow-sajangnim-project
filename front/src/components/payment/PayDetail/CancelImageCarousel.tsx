@@ -82,9 +82,12 @@ const CancelImageCarouselBG = styled.div`
   right: 0;
   background-color: rgba(196, 196, 196, 0.8);
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: center;
+  -webkit-align-items: center;
   overflow: hidden;
   padding: 1.5rem;
 `;
@@ -93,6 +96,7 @@ const ImageCarouselBox = styled.div`
   width: 100%;
   max-width: 65rem;
   display: flex;
+  display: -webkit-flex;
 
   > div {
     background-color: white;
@@ -128,7 +132,9 @@ const ImageCarouselBox = styled.div`
 
 const CarouselBtnBox = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: center;
+  -webkit-align-items: center;
   padding: 1.2rem;
 
   span {
@@ -139,7 +145,9 @@ const CarouselBtnBox = styled.div`
 
   > button {
     display: flex;
+    display: -webkit-flex;
     align-items: center;
+    -webkit-align-items: center;
     border: none;
     margin: 0 1rem;
     padding: 0.5rem 1rem;
@@ -162,7 +170,9 @@ const CarouselBtnBox = styled.div`
 const CloseBtnBox = styled.div`
   width: 100%;
   display: flex;
+  display: -webkit-flex;
   justify-content: right;
+  -webkit-justify-content: right;
   margin-right: 1.5rem;
 
   button {

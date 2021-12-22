@@ -33,5 +33,6 @@ const PayResultBox = styled.div`
   padding-top: 1.5rem;
   flex-grow: 1;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
 `;

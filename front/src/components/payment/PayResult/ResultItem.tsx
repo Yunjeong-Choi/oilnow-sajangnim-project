@@ -67,6 +67,7 @@ export default ResultItem;
 const ResultItemBox = styled.div<{ itemHeight: number }>`
   height: ${(props) => props.itemHeight}px;
   display: flex;
+  display: -webkit-flex;
   font-size: 1.3rem;
   font-weight: 500;
   line-height: 1.9rem;
@@ -118,6 +119,9 @@ const StyledPayStatus = styled.div`
   background-color: ${(props) => props.color};
   border-radius: 1.5rem;
   display: flex;
+  display: -webkit-flex;
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: center;
+  -webkit-align-items: center;
 `;

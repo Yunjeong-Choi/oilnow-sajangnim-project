@@ -34,6 +34,7 @@ export const PayDetailInnerBox = styled.div`
   background-color: white;
   padding: 1.2rem;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
 
   span {
@@ -46,6 +47,7 @@ export const PayDetailInnerBox = styled.div`
 
 const InfoTable = styled.div`
   display: flex;
+  display: -webkit-flex;
   padding: 1rem;
   font-weight: 500;
   font-size: 1.3rem;
@@ -53,6 +55,7 @@ const InfoTable = styled.div`
 
   div {
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
 
     div {

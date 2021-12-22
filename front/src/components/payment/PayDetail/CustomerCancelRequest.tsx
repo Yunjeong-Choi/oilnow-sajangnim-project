@@ -124,6 +124,7 @@ const RequestText = styled.div`
 const RequestImgList = styled.div`
   padding-bottom: 1.5rem;
   display: flex;
+  display: -webkit-flex;
   overflow-x: scroll;
 
   ::-webkit-scrollbar {
@@ -142,8 +143,11 @@ const RequestImgBox = styled.div`
   width: 8rem;
   height: 8rem;
   display: flex;
+  display: -webkit-flex;
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: center;
+  -webkit-align-items: center;
   border: 0.07rem solid var(--borderGray);
   border-radius: 0.4rem;
   margin-top: 1rem;

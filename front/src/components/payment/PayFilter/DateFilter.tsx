@@ -78,6 +78,7 @@ const StyledDatePicker = styled(DatePicker)`
 
 const DateFilterBox = styled.div`
   display: flex;
+  display: -webkit-flex;
   height: 3rem;
   text-align: center;
 

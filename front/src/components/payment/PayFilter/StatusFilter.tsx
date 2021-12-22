@@ -44,6 +44,7 @@ export default StatusFilter;
 //styled-components
 const StatusFilterBox = styled.div`
   display: flex;
+  display: -webkit-flex;
   height: 3rem;
 `;
 

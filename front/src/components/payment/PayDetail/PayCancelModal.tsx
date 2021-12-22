@@ -51,7 +51,9 @@ const PayCancelModalBG = styled.div`
   right: 0;
   background-color: rgba(196, 196, 196, 0.5);
   display: flex;
+  display: -webkit-flex;
   align-items: center;
+  -webkit-align-items: center;
 `;
 
 const ModalContentBox = styled.div`
@@ -60,13 +62,16 @@ const ModalContentBox = styled.div`
   background-color: white;
   padding: 3rem 2.5rem;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.25);
 `;
 
 const ContentText = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
 
   > span {
@@ -95,8 +100,11 @@ const CancelReason = styled.div`
   border-radius: 0.4rem;
   position: relative;
   display: flex;
+  display: -webkit-flex;
   justify-content: right;
+  -webkit-justify-content: right;
   align-items: center;
+  -webkit-align-items: center;
 
   img {
     margin-right: 1rem;
@@ -117,7 +125,9 @@ const CancelReason = styled.div`
 
 const ProcessOptions = styled.div`
   display: flex;
+  display: -webkit-flex;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
 
   button {
     width: 48%;
