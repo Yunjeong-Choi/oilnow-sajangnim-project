@@ -73,10 +73,14 @@ const ResultList: FunctionComponent<FilterValueProps> = ({
             ? cur.plateNum.includes(plateNumKeyword)
             : true;
         const startDateCondition = startDate
-          ? startDate.getTime() - new Date(cur.payDate).getTime() <= 0
+          ? startDate.getTime() -
+              new Date(cur.payDate.replace(/-/g, "/")).getTime() <=
+            0
           : true;
         const endDateCondition = endDate
-          ? endDate.getTime() - new Date(cur.payDate).getTime() >= 0
+          ? endDate.getTime() -
+              new Date(cur.payDate.replace(/-/g, "/")).getTime() >=
+            0
           : true;
 
         if (
