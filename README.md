@@ -7,7 +7,7 @@
      ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/85290084/147054295-c666867b-ad0a-47ca-a459-e01f271c42ec.gif)
 	
 ### 1. 기술스택
-   - Front-End: `JavaScript, TypeScript, React.js, Redux, Styled-Components`
+   - Front-End: `JavaScript, TypeScript, React.js, Styled-Components`
    - Other: `Figma`
 
 ### 2. 기능
